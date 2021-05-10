@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MyStartupEquity AdminLogin suite">
+
+	<listeners>
+		<listener class-name="Listeners.ExtentListeners">
+		</listener>
+	</listeners>
+
+	<test thread-count="5" name="LoginPage - Tests">
+		<parameter name="browser" value="chrome">
+		</parameter>
+		<classes>
+			<class name="com.MyStartupEquity.Tests.loginTest" />
+		</classes>
+	</test>
+
+	<!-- <test thread-count="5" name="DashboardPage - Tests">
+		<classes>
+			<class name="TestCases.dashboardTest" />
+		</classes>
+	</test>
+
+	<test thread-count="5" name="ESOP StructurePage - Tests">
+		<classes>
+			<class name="TestCases.esopStructureTest" />
+		</classes>
+	</test>
+	<test thread-count="5" name="EmployeesPage - Tests">
+		<classes>
+			<class name="TestCases.EmployeesTest" />
+		</classes>
+	</test> -->
+</suite> 
+ 

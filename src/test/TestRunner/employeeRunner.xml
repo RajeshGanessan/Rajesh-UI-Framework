@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="MystartUpEquity Test automation regression suite" verbose="3"
+       thread-count="4">
+
+    <listeners>
+        <listener class-name="Listeners.ExtentReportListeners"> </listener>
+    </listeners>
+    <test name="Chrome test">
+        <parameter name="Browser" value="chrome"/>
+        <classes>
+<!--            <class name="com.MyStartupEquity.Tests.LoginTest" />-->
+            <class name="com.MyStartupEquity.Tests.EmployeeHomePageTest"/>
+
+        </classes>
+    </test>
+</suite>
+        <!--    <test name="Firefox test">-->
+        <!--        <parameter name="Browser" value="firefox" />-->
+        <!--        <classes>-->
+        <!--            <class name="com.MyStartupEquity.Tests.loginTest" />-->
+        <!--        </classes>-->
+        <!--    </test>-->
+
+        <!-- <test name="contacts page test"> <classes> <class name="com.qa.hubspot.tests.ContactsPageTest"
+            /> </classes> </test> -->
+

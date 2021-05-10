@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MyStartupEquity AdminLogin suite">
+
+	<listeners>
+		<listener class-name="Listeners.ExtentReportListeners"/>
+	</listeners>
+
+	<test thread-count="3" name="MyStartup Equity">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.MyStartupEquity.Tests.LoginTest" />
+<!--&lt;!&ndash;			<class name="com.MyStartupEquity.Tests.DashboardPageTest" />&ndash;&gt;-->
+<!--			<class name="com.MyStartupEquity.Tests.esopStructureTest" />-->
+<!--			<class name="com.MyStartupEquity.Tests.vestingScheduleTest"/>-->
+<!--			<class name="com.MyStartupEquity.Tests.EmployeesTest" />-->
+<!--			<class name="com.MyStartupEquity.Tests.grantOptionTest" />-->
+<!--			<class name="com.MyStartupEquity.Tests.pendingRequestTest" />-->
+<!--			<class name="TestCases.fundingRoundTest" />-->
+<!--			<class name="TestCases.manageExitProcessTest"/>-->
+<!--			<class name="com.MyStartupEquity.Tests.exitProcessTest"/>-->
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 

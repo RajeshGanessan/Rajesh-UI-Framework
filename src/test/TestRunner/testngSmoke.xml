@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="MystartUpEquity Test automation regression suite" verbose="3"
+       thread-count="2" parallel="classes">
+
+    <listeners>
+        <listener class-name="Listeners.ExtentReportListeners"> </listener>
+    </listeners>
+    <test name="Chrome - Admin Login Tests">
+        <parameter name="Browser" value="chrome" />
+        <classes>
+            <class name="com.MyStartupEquity.Tests.LoginTest" />
+<!--            <class name="com.MyStartupEquity.Tests.DashboardPageTest" />-->
+<!--            <class name="com.MyStartupEquity.Tests.EquitySchemePageTest"/>-->
+             <class name="com.MyStartupEquity.Tests.VestingSchedulePageTest"/>
+            <class name="com.MyStartupEquity.Tests.EmployeesPageTest"/>
+            <class name="com.MyStartupEquity.Tests.grantOptionTest"/>
+            <class name="com.MyStartupEquity.Tests.pendingRequestTest"/>
+             <class name="com.MyStartupEquity.Tests.VestingTablePageTest"/>
+             <class name="com.MyStartupEquity.Tests.ReportsPageTest"/>
+<!--                 <class name="com.MyStartupEquity.Tests.ExerciseOptionPageTest"/>-->
+        </classes>
+    </test>
+<!--    <test name="Chrome - Employee login" enabled="false">-->
+<!--        <parameter name="Browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="com.MyStartupEquity.Tests.EmployeeHomePageTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+</suite>
+<!--    <test name="Firefox test">-->
+<!--        <parameter name="Browser" value="firefox" />-->
+<!--        <classes>-->
+<!--            <class name="com.MyStartupEquity.Tests.loginTest" />-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <!-- <test name="contacts page test"> <classes> <class name="com.qa.hubspot.tests.ContactsPageTest"
+        /> </classes> </test> -->
+
