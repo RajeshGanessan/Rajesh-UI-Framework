@@ -1,8 +1,8 @@
 package Pages;
 
 import Base.Base;
-import Utils.AppConstants;
-import Utils.DynamicXpath;
+import Constants.AppConstants;
+import Utils.PageUtils.DynamicXpath;
 import Utils.PageUtils.ElementUtils;
 import Utils.PageUtils.HelperMethods;
 import org.openqa.selenium.By;
@@ -18,6 +18,7 @@ public class ReportsPage extends Base {
     private WebDriver driver;
     ElementUtils elementUtils;
     HelperMethods helperMethods;
+   private DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("MMMM d, yyyy");
 
 
     public ReportsPage(WebDriver driver){
@@ -41,7 +42,7 @@ public class ReportsPage extends Base {
     String dateXpath = "//span[@aria-label='%replaceable%']";
 
     //Selecting Report Type
-    public void SelectReportType(String reportName){
+    public void selectReportType(String reportName){
         helperMethods.selectFromDropdown(reportName,reportType);
     }
 
@@ -51,7 +52,7 @@ public class ReportsPage extends Base {
     }
 
     //Selecting report with Transaction Type
-    public void SelectReportType(String reportName,String TransactionType){
+    public void selectReportType(String reportName,String TransactionType){
         helperMethods.selectFromDropdown(reportName,reportType);
         helperMethods.selectFromDropdown(TransactionType,transactionType);
     }
@@ -63,7 +64,6 @@ public class ReportsPage extends Base {
     }
 
     public void selectEndDate(){
-        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("MMMM d, yyyy");
         String dateToSelect =  formatter.format(LocalDate.now());
         elementUtils.doClick(endDate);
         if(elementUtils.doIsDisplayed(calenderTitle))
@@ -82,26 +82,27 @@ public class ReportsPage extends Base {
             elementUtils.doClick(downloadReportBtn);
             elementUtils.waitForElementInvisibility(fetchingFile);
              elementUtils.staticWait(2);
-            return isFileDownloaded_Ext(downloadPath,".xlsx");
+            return isFileDownloadedExt(downloadPath,".xlsx");
     }
 
     //delete the DownloadedReportFile
-    public void isFileDeleted(){
-        File dir = new File(AppConstants.fileDownloadPath);
+    public boolean isFileDeleted(){
+        File dir = new File(AppConstants.FILEDOWNLOADPATH);
         File files[] = dir.listFiles();
         if(files.length==0) {
             System.out.println("No Files to delete");
+            return false;
         }
             for (File file: files)
-                file.delete();
-        }
+                return file.delete();
+        return false;
+    }
 
     //Checking whether FILE is present in the downloaded Directory
-    private boolean isFileDownloaded_Ext (String dirPath,String ext){
+    private boolean isFileDownloadedExt (String dirPath,String ext){
 
         File dir = new File(dirPath);
         File[] files = dir.listFiles();
-        System.out.println("Number of files -> " + files.length);
        return Arrays.stream(files).anyMatch(s -> s.getName().contains(ext));
     }
 

@@ -5,7 +5,7 @@ import java.io.FileFilter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
-import Utils.DynamicXpath;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.*;
@@ -80,13 +80,21 @@ public class HelperMethods  {
 	public  String getRandomNumberValue(int value) {
 		int randomNum = rand.nextInt(value);
 		if(randomNum==2){
-			randomNum = rand.nextInt(value);
+			getRandomNumberValue(value);
+		}
+		return Integer.toString(randomNum);
+	}
+
+	public String getRandomVestedOptionValue(int value){
+		int randomNum = rand.nextInt(value);
+		if(randomNum == 0){
+			randomNum++;
 		}
 		return Integer.toString(randomNum);
 	}
 
 	// Getting modded file
-	public  String lastFileModified(String dir) {
+	public  static String lastFileModified(String dir) {
 		File fl = new File(dir);
 		File[] files = fl.listFiles(new FileFilter() {
 			public boolean accept(File file) {

@@ -13,7 +13,7 @@
 <!--&lt;!&ndash;			<class name="com.MyStartupEquity.Tests.DashboardPageTest" />&ndash;&gt;-->
 <!--			<class name="com.MyStartupEquity.Tests.esopStructureTest" />-->
 <!--			<class name="com.MyStartupEquity.Tests.vestingScheduleTest"/>-->
-<!--			<class name="com.MyStartupEquity.Tests.EmployeesTest" />-->
+			<class name="com.MyStartupEquity.Tests.EmployeesTest" />
 <!--			<class name="com.MyStartupEquity.Tests.grantOptionTest" />-->
 <!--			<class name="com.MyStartupEquity.Tests.pendingRequestTest" />-->
 <!--			<class name="TestCases.fundingRoundTest" />-->

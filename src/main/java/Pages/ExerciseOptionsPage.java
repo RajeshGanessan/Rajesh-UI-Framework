@@ -1,15 +1,18 @@
 package Pages;
 
 import Base.Base;
-import Utils.DynamicXpath;
+import Utils.PageUtils.DynamicXpath;
 import Utils.PageUtils.ElementUtils;
 import Utils.PageUtils.HelperMethods;
+import com.google.common.util.concurrent.Uninterruptibles;
+import lombok.NonNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ExerciseOptionsPage extends Base {
 
@@ -28,12 +31,16 @@ public class ExerciseOptionsPage extends Base {
     private final By pageHeader = By.xpath("//div[@class='page_title']");
     private final By grantDetailsAccordian = By.xpath("//span[text()='Grant Details']//parent::div");
     private final By exerciseOptionsPageButton = By.xpath("//button[text()='Exercise Options']");
-    private final By optionsVestedList = By.xpath("//tbody[@class='table-body']/tr/td[position()=2]");
-    private final By optionsToBeExercisedTextBox = By.xpath("//tbody[@class='table-body']/tr/td[position()=2]//following-sibling::td[4]/input");
-    private final By exerciseDateBox = By.xpath("//tbody[@class='table-body']/tr/td[position()=2]//following-sibling::td[6]//input");
-    private final By uploadFileBtn = By.xpath("//tbody[@class='table-body']/tr/td[position()=2]//following-sibling::td[7]/button");
-    private final By exerciseBtn = By.xpath("button[type='submit']");
+    private final By arrowDown = By.xpath("//span[@class='arrowDown']");
+    private final By exerciseFormBtn = By.xpath("//button[@form='exercise_form']");
+    private final By optionsVestedCount = By.xpath("//tbody[@class='table-body']/tr[1]/td[position()=2]");
+    private final By optionsToBeExercisedTextBox = By.xpath("//tbody[@class='table-body']/tr[1]/td[position()=2]//following-sibling::td[4]/input");
+    private final By exerciseDateBox = By.xpath("//tbody[@class='table-body']/tr[1]/td[position()=2]//following-sibling::td[6]//input");
+    private final By uploadFileBtn = By.xpath("//tbody[@class='table-body']/tr[1]/td[position()=2]//following-sibling::td[7]//input");
+    private final By employeeExitNavBar = By.xpath("//a[contains(text(),'Employee Exits')]");
     private final By calenderTitle = By.xpath("//select[@class='flatpickr-monthDropdown-months']");
+    private final By successMessage = By
+            .xpath("//div[@role='alert' and contains(text(),'Exercise detail updated successfully')]");
     String unitsVestedRowsXpath = "//tbody[@class='table-body']/tr[%replaceable%]/td[position()=5]";
     String employeeXpath ="//tbody[@class='table-body']/tr[%replaceable%]/td[1]";
     String selectEmployeeXpath = "//tbody[@class='table-body']//td[contains(text(),'%replaceable%')]";
@@ -43,28 +50,60 @@ public class ExerciseOptionsPage extends Base {
     }
 
     //To get employee with vestedOptions
-    private List<String> getEmpWithVestedOptions() {
+    private String getEmpWithVestedOptions() {
+        Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
+        String empToSelect = "";
         List<WebElement> rows = elementUtils.getListOfElements(allGrantsTableRows);
-        ArrayList<String> employees = new ArrayList<>();
         for(int i=1;i<=rows.size();i++){
-            List<WebElement> columns = elementUtils.getListOfElements(DynamicXpath.get(unitsVestedRowsXpath,i));
-            for(WebElement vestedOption : columns){
+            WebElement vestedOption = elementUtils.getElement(DynamicXpath.get(unitsVestedRowsXpath,i));
                 int optionsCount = Integer.parseInt(vestedOption.getText());
                 if(optionsCount > 0 ){
-                    WebElement person = elementUtils.getElement(DynamicXpath.get(employeeXpath,i));
-                     employees.add(person.getText());
+                     empToSelect = elementUtils.getElement(DynamicXpath.get(employeeXpath,i)).getText();
+                    System.out.println(empToSelect);
+                    break;
                 }
-            }
-            if(!employees.isEmpty()) break;
         }
-        return employees;
+        return empToSelect;
     }
 
-    public boolean goToEmployeeDetails(){
-        List<String> employees = getEmpWithVestedOptions();
-        String employeeToSelect = employees.get(0);
-        elementUtils.doClick(DynamicXpath.get(selectEmployeeXpath,employeeToSelect));
-        return elementUtils.doIsDisplayed(pageHeader);
+
+
+    public ExerciseOptionsPage enterOptionsToBeExercised(){
+        elementUtils.doSendKeys(optionsToBeExercisedTextBox,getOptionsToBeExercised());
+        return this;
+    }
+
+    public ExerciseOptionsPage selectExerciseDate(){
+        helperMethods.selectDateFromCalender(arrowDown,exerciseDateBox,calenderTitle);
+        return this;
+    }
+
+    public ExerciseOptionsPage uploadExerciseLetter(){
+        elementUtils.doSendKeys(uploadFileBtn, helperMethods.getRandomFile());
+        return this;
+    }
+
+    public boolean checkSuccessMessage() {
+            elementUtils.doClick(exerciseFormBtn);
+             return elementUtils.doIsDisplayed(successMessage);
+    }
+
+    private String getOptionsToBeExercised(){
+        int optionsVested = Integer.parseInt(elementUtils.doGetText(optionsVestedCount));
+        return helperMethods.getRandomVestedOptionValue(optionsVested);
+    }
+
+    public ExerciseOptionsPage goToEmployeeDetails()  {
+         String employee = getEmpWithVestedOptions();
+        if(employee.isEmpty()){
+            System.out.println("No Employees with vested Options found");
+            throw new RuntimeException("No Employees with vested Options found");
+        } else {
+        System.out.println(employee);
+        elementUtils.doClick(DynamicXpath.get(selectEmployeeXpath,employee));
+         elementUtils.doIsDisplayed(pageHeader);
+        }
+        return this;
     }
 
     public ExerciseOptionsPage openGrantDetails(){
@@ -73,33 +112,17 @@ public class ExerciseOptionsPage extends Base {
     }
 
     public boolean goToExerciseOptionsPage(){
-            helperMethods.scrollIntoView(elementUtils.getElement(exerciseOptionsPageButton));
+        if(!elementUtils.doIsDisplayed(exerciseOptionsPageButton)) {
+            helperMethods.scrollIntoView(elementUtils.getElement(exerciseOptionsPageButton));}
             elementUtils.doClick(exerciseOptionsPageButton);
-            return elementUtils.doIsDisplayed(pageHeader);
+            return elementUtils.doIsDisplayed(exerciseFormBtn);
     }
 
-
-    private List<String> getValueFromTable(By rowLocator,String employeeXpath,String columnXpath,List<String> employeeList){
-        List<WebElement> rows = elementUtils.getListOfElements(rowLocator);
-        for(int i=1;i<=rows.size();i++){
-            List<WebElement> columns = elementUtils.getListOfElements(DynamicXpath.get(columnXpath,i));
-            for(WebElement vestedOption : columns){
-                int optionsCount = Integer.parseInt(vestedOption.getText());
-                if(optionsCount > 0 ){
-                    WebElement person = elementUtils.getElement(DynamicXpath.get(employeeXpath,i));
-                    employeeList.add(person.getText());
-                }
-            }
-            if(!employeeList.isEmpty()) break;
-        }
-        return employeeList;
-
-    }
-
-
-
-
-
+    //navigating to EmployeeExit page
+    public EmployeeExitPage goToEmployeeExitPage(){
+        helperMethods.scrollIntoView(elementUtils.getElement(employeeExitNavBar));
+        elementUtils.clickElementByJS(employeeExitNavBar);
+        return new EmployeeExitPage(driver);    }
 
 }
 

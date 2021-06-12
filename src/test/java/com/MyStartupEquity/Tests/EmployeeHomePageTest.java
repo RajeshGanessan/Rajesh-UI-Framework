@@ -1,10 +1,10 @@
 package com.MyStartupEquity.Tests;
 
 import Base.BaseTest;
+import Enums.ConfigProperties;
 import Pages.EmployeeHomePage;
-import Pages.EmployeesPage;
-import Utils.AppConstants;
-import Utils.ReadProperty;
+import Constants.AppConstants;
+import Utils.PropertyUtils.ReadProperty;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -17,7 +17,7 @@ public class EmployeeHomePageTest extends BaseTest {
     @BeforeClass
     public void setup() {
 //		getData = new ExcelUtils("GrantOptions");
-       employeeHomePage =  loginPage.doLoginToEmployeeHomePage(ReadProperty.getProperty("empEmail"),ReadProperty.getProperty("password"));
+       employeeHomePage =  loginPage.doLoginToEmployeeHomePage(ReadProperty.getProperty(ConfigProperties.EMPEMAIL),ReadProperty.getProperty(ConfigProperties.PASSWORD));
     }
 
     @Test(priority = 1,description = "Checking employee dashboard header")
@@ -45,7 +45,7 @@ public class EmployeeHomePageTest extends BaseTest {
 
     @Test(priority = 3, description = "DownloadingDashboardReport")
     public void verifyDashboardReportDownload(){
-        boolean isDownloaded = employeeHomePage.verifyFileDownload(AppConstants.fileDownloadPath);
+        boolean isDownloaded = employeeHomePage.verifyFileDownload(AppConstants.FILEDOWNLOADPATH);
         Assert.assertTrue(isDownloaded);
     }
 

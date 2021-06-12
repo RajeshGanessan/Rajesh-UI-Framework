@@ -1,13 +1,14 @@
 package com.MyStartupEquity.Tests;
+import Enums.ConfigProperties;
 import Pages.GrantOptionPage;
 import Pages.PendingRequestPage;
-import Utils.ReadProperty;
+import Utils.PropertyUtils.ReadProperty;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import Base.BaseTest;
-import Utils.AppConstants;
+import Constants.AppConstants;
 
 public class pendingRequestTest extends BaseTest {
 
@@ -16,7 +17,7 @@ public class pendingRequestTest extends BaseTest {
 
 	@BeforeClass
 	public void Setup() {
-		loginPage.doLogin(ReadProperty.getProperty("email"),ReadProperty.getProperty("password"));
+		loginPage.doLogin(ReadProperty.getProperty(ConfigProperties.EMAIL),ReadProperty.getProperty(ConfigProperties.PASSWORD));
 		grantOptionPage = new GrantOptionPage(driver);
 		pendingRequestPage = grantOptionPage.goToPendingRequestPage();
 	}

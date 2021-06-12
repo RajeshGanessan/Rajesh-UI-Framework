@@ -1,14 +1,17 @@
 package com.MyStartupEquity.Tests;
 
 
+import Enums.ConfigProperties;
+import Listeners.ExtentReportManager;
 import Pages.DashboardPage;
-import Utils.ReadProperty;
+import Utils.PropertyUtils.ReadProperty;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import Base.BaseTest;
-import Utils.AppConstants;
+import Constants.AppConstants;
 
 public class DashboardPageTest extends BaseTest {
 
@@ -16,8 +19,7 @@ public class DashboardPageTest extends BaseTest {
 
     @BeforeClass
     public void DashboardSetup() {
-
-        dashboardPage = loginPage.doLogin(ReadProperty.getProperty("email"), ReadProperty.getProperty("password"));
+        dashboardPage = loginPage.doLogin(ReadProperty.getProperty(ConfigProperties.EMAIL), ReadProperty.getProperty(ConfigProperties.PASSWORD));
     }
 
     @Test(priority = 1, description = "Checking VestingTableHeader")
@@ -27,7 +29,7 @@ public class DashboardPageTest extends BaseTest {
         System.out.println("Dashboard page header verified");
     }
 
-    @Test(description = "Checking Dashboard Footer",enabled = false)
+    @Test(priority = 2,description = "Checking Dashboard Footer")
     public void dashboardCheck() throws InterruptedException {
 
         String footerText = dashboardPage.getFooterText();

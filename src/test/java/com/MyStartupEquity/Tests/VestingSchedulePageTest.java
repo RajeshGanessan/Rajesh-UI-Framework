@@ -1,15 +1,16 @@
 package com.MyStartupEquity.Tests;
 
 import Base.BaseTest;
+import Enums.ConfigProperties;
 import Pages.EquitySchemePage;
 import Pages.VestingSchedulePage;
-import Utils.DataUtil.ExcelUtils;
-import Utils.ReadProperty;
+import Utils.TestDataUtil.ExcelUtils;
+import Utils.PropertyUtils.ReadProperty;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import Utils.AppConstants;
+import Constants.AppConstants;
 
 public class VestingSchedulePageTest extends BaseTest {
 
@@ -19,7 +20,7 @@ public class VestingSchedulePageTest extends BaseTest {
 	@BeforeClass
 	public void setup() {
 		getData = new ExcelUtils("VestingSchedules");
-		loginPage.doLogin(ReadProperty.getProperty("email"),ReadProperty.getProperty("password"));
+		loginPage.doLogin(ReadProperty.getProperty(ConfigProperties.EMAIL),ReadProperty.getProperty(ConfigProperties.PASSWORD));
 		equitySchemePage = new EquitySchemePage(driver);
 		vestingSchedulePage = equitySchemePage.goToVestingSchedulePage();
 	}

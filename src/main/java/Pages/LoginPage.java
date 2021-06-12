@@ -1,7 +1,7 @@
 package Pages;
 
 import Base.Base;
-import Utils.AppConstants;
+import Constants.AppConstants;
 import Utils.PageUtils.ElementUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

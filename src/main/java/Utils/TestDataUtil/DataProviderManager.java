@@ -1,4 +1,4 @@
-package Utils.DataUtil;
+package Utils.TestDataUtil;
 
 import org.testng.annotations.DataProvider;
 
@@ -16,5 +16,11 @@ public class  DataProviderManager {
         return new Object[]{"Straight Line method","Front Loaded method"};
     }
 
-
+    //Data Provider for ExitProcessTypes
+    @DataProvider(name = "ExitProcessTypes")
+    public Object[] getExitProcessTypes(){
+        return new Object[]{
+                 "Resignation","Death","Termination with cause"
+        };
+    }
 }

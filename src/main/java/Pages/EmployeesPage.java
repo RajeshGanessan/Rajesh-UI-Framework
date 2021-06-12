@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import Base.Base;
 
-import Utils.DynamicXpath;
+import Utils.PageUtils.DynamicXpath;
 
 public class EmployeesPage extends Base{
 
@@ -53,7 +53,7 @@ public class EmployeesPage extends Base{
 	// Selecting date from calender
 	public void selectJoiningDate() {
 		helperMethods.selectDateFromCalender(arrowDown,joiningDate,calenderTitle);
-	}final
+	}
 
 	// checking successMessage
 	public boolean checkSuccessMessage() {
@@ -89,10 +89,9 @@ public class EmployeesPage extends Base{
 		return this;
 	}
 
-	public EmployeesPage setEmployeePhoneNumber(String contactNumberToEnter) {
+	public void setEmployeePhoneNumber(String contactNumberToEnter) {
 		elementUtils.doSendKeys(employeePhoneNumber,contactNumberToEnter);
 		helperMethods.scrollIntoView(elementUtils.getElement(employeeDesignation));
-		return this;
 	}
 
 	public void setEmployeeAddress(String addressToEnter){

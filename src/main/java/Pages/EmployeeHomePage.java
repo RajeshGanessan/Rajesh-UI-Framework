@@ -1,11 +1,12 @@
 package Pages;
 
 import Base.Base;
-import Utils.AppConstants;
+import Constants.AppConstants;
 import Utils.PageUtils.ElementUtils;
 import Utils.PageUtils.HelperMethods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 
 import java.io.File;
 import java.util.Arrays;
@@ -75,11 +76,12 @@ public class EmployeeHomePage extends Base {
 
         Pattern p = Pattern.compile("(\\d+(?:\\.\\d+)?)");
         Matcher m = p.matcher(textToConvert);
-        String text = null;
+        StringBuilder builder = new StringBuilder();
         while(m.find()){
-             text = m.group();
+             String text = m.group();
+             builder.append(text);
         }
-        return Double.parseDouble(text);
+        return Double.parseDouble(builder.toString());
     }
 
     public EmployeeHomePage goToExercisePopup(){
@@ -118,7 +120,7 @@ public class EmployeeHomePage extends Base {
 
     //delete the DownloadedReportFile
     public void isFileDeleted(){
-        File dir = new File(AppConstants.fileDownloadPath);
+        File dir = new File(AppConstants.FILEDOWNLOADPATH);
         File files[] = dir.listFiles();
         if(files.length==0) {
             System.out.println("No Files to delete");

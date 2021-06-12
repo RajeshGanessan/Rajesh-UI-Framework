@@ -2,16 +2,17 @@ package com.MyStartupEquity.Tests;
 
 import java.io.IOException;
 
+import Enums.ConfigProperties;
 import Pages.DashboardPage;
-import Utils.ReadProperty;
+import Utils.PropertyUtils.ReadProperty;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import Base.BaseTest;
 import Pages.EquitySchemePage;
-import Utils.AppConstants;
-import Utils.DataUtil.ExcelUtils;
+import Constants.AppConstants;
+import Utils.TestDataUtil.ExcelUtils;
 
 public class EquitySchemePageTest extends BaseTest {
 
@@ -21,9 +22,10 @@ public class EquitySchemePageTest extends BaseTest {
 	@BeforeClass
 	public void setup()  {
 		getData = new ExcelUtils("ESOPscheme");
-		dashboardPage = loginPage.doLogin(ReadProperty.getProperty("email"), ReadProperty.getProperty("password"));
+		dashboardPage = loginPage.doLogin(ReadProperty.getProperty(ConfigProperties.EMAIL), ReadProperty.getProperty(ConfigProperties.PASSWORD));
 		equitySchemePage = dashboardPage.goToEquitySchemePage();
 	}
+
 
 	@Test(priority = 1)
 	public void verifySchemePageHeader() {

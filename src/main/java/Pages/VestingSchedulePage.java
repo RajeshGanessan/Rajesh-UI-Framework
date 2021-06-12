@@ -1,7 +1,7 @@
 package Pages;
 
 import Base.Base;
-import Utils.DataUtil.ExcelUtils;
+import Utils.TestDataUtil.ExcelUtils;
 import Utils.PageUtils.ElementUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

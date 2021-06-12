@@ -1,15 +1,16 @@
 package com.MyStartupEquity.Tests;
 
+import Enums.ConfigProperties;
 import Pages.VestingSchedulePage;
-import Utils.DataUtil.FakerData;
-import Utils.ReadProperty;
+import Utils.TestDataUtil.FakerData;
+import Utils.PropertyUtils.ReadProperty;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import Base.BaseTest;
 import Pages.EmployeesPage;
-import Utils.AppConstants;
+import Constants.AppConstants;
 
 public class EmployeesPageTest extends BaseTest {
 
@@ -19,7 +20,7 @@ public class EmployeesPageTest extends BaseTest {
 	@BeforeClass
 	public void setup() {
 		faker = new FakerData();
-        loginPage.doLogin(ReadProperty.getProperty("email"),ReadProperty.getProperty("password"));
+        loginPage.doLogin(ReadProperty.getProperty(ConfigProperties.EMAIL),ReadProperty.getProperty(ConfigProperties.PASSWORD));
         vestingSchedulePage = new VestingSchedulePage(driver);
         employeesPage =  vestingSchedulePage.goToEmployeesPage();
 
@@ -33,14 +34,14 @@ public class EmployeesPageTest extends BaseTest {
 	}
 
 	@Test(description = "Adding New Employee",priority = 2)
-	public void addNewEmployee() throws Exception {
+	public void addNewEmployee() {
 		Assert.assertTrue(employeesPage.GoToAddEmployeePage());
 		employeesPage.setEmployeeName(faker.getEmpName())
 				     .setEmployeeId(faker.generateId())
 				     .setEmpEmail(faker.getEmailAddress())
 		             .setEmployeePhoneNumber(faker.getPhoneNumber());
 		employeesPage.setEmployeeAddress(faker.getAddress());
-		employeesPage.selectNationality("Singapore");
+		employeesPage.selectNationality("India");
 		employeesPage.selectJoiningDate();
 		employeesPage.setPanNumber("ASDFG3456K");
 		employeesPage.setEmployeeDesignation("Product Engineer");

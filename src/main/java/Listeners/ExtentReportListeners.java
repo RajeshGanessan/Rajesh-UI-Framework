@@ -24,24 +24,17 @@ import java.util.Date;
 
 public class ExtentReportListeners  extends Base implements ITestListener {
 
-    private static ExtentReports extent = ExtentReportManager.createInstance();
-    private static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 
     @Override
     public synchronized void onStart(ITestContext context) {
+        ExtentReporter.initReports();
         System.out.println("Test Suite has Started");
     }
 
     @Override
     public synchronized void onFinish(ITestContext context) {
         System.out.println("Test Suite has completed");
-        extent.flush();
-        test.remove();
-//        try{
-//        Desktop.getDesktop().browse(new File(HelperMethods).toURI());} catch (IOException e){
-//            e.printStackTrace();
-//        }
-
+       ExtentReporter.flushReports();
     }
     @Override
     public synchronized void onTestStart(ITestResult result) {
@@ -52,52 +45,39 @@ public class ExtentReportListeners  extends Base implements ITestListener {
         String className = qualifiedName.substring(mid + 1, last);
 
         System.out.println(methodName + " started!");
-        ExtentTest extentTest = extent.createTest(result.getMethod().getMethodName(),
-                result.getMethod().getDescription());
-
-        extentTest.assignCategory(result.getTestContext().getSuite().getName());
-        extentTest.assignCategory(className);
-        test.set(extentTest);
-        test.get().getModel().setStartTime(getTime(result.getStartMillis()));
+        ExtentReporter.createTest((result.getMethod().getMethodName()),result.getMethod().getDescription());
+        ExtentReportManager.getTest().assignCategory(result.getTestContext().getSuite().getName());
+        ExtentReportManager.getTest().assignCategory(className);
+//        test.set(ExtentReportManager.getTest());
+        ExtentReportManager.getTest().getModel().setStartTime(getTime(result.getStartMillis()));
     }
 
     @Override
     public synchronized void onTestSuccess(ITestResult result) {
         System.out.println(result.getMethod().getMethodName() + " Passed!!");
-        test.get().pass("Test Passed");
-        test.get().getModel().setEndTime(getTime(result.getEndMillis()));
+        ExtentReportManager.getTest().pass("Test Passed");
+        ExtentReportManager.getTest().getModel().setEndTime(getTime(result.getEndMillis()));
     }
 
     @Override
     public synchronized void onTestFailure(ITestResult result) {
         System.out.println(result.getMethod().getMethodName() + " Failed!!");
-        try{
-            test.get().log(Status.FAIL, MarkupHelper.createLabel("Test case FAILED due to issue",
-                    ExtentColor.RED));
-            test.get().info("Failed URL ---> " + getDriver().getCurrentUrl());
-            test.get().fail(result.getThrowable(),MediaEntityBuilder.createScreenCaptureFromPath("." + takeScreenshot()).build());
-//            test.get().log(Status.FAIL, (Markup) test.get().addScreenCaptureFromPath(takeScreenshot()));
-
-        } catch (IOException e) {
-            System.err.println("Exception thrown while updating test fail status " + Arrays.toString(e.getStackTrace()));
-            e.printStackTrace();
-        }
-        test.get().getModel().setEndTime(getTime(result.getEndMillis()));
+        ExtentReportManager.getTest().log(Status.FAIL, MarkupHelper.createLabel("Test case FAILED due to issue",
+                ExtentColor.RED));
+        ExtentReportManager.getTest().info("Failed URL ---> " + getDriver().getCurrentUrl());
+        ExtentReportManager.getTest().fail(result.getThrowable(),MediaEntityBuilder.createScreenCaptureFromBase64String(ExtentReporter.takeScreenshot()).build());
+        //ExtentReportManager.getTest().fail(result.getThrowable(),MediaEntityBuilder.createScreenCaptureFromPath("." + takeScreenshot()).build());
+        ExtentReportManager.getTest().getModel().setEndTime(getTime(result.getEndMillis()));
     }
 
     @Override
     public synchronized void onTestSkipped(ITestResult result) {
         System.out.println(result.getMethod().getMethodName() + " Skipped!!");
-        try{
-            test.get().log(Status.SKIP, MarkupHelper.createLabel("Test case SKIPPED due to issue",
-                    ExtentColor.YELLOW));
-            test.get().skip(result.getThrowable(),
-                    MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot()).build());
-        } catch (IOException e) {
-            System.err.println("Exception thrown while updating test Skip status " + Arrays.toString(e.getStackTrace()));
-            e.printStackTrace();
-        }
-        test.get().getModel().setEndTime(getTime(result.getEndMillis()));
+        ExtentReportManager.getTest().log(Status.SKIP, MarkupHelper.createLabel("Test case SKIPPED due to issue",
+                ExtentColor.YELLOW));
+        ExtentReportManager.getTest().skip(result.getThrowable(),
+                MediaEntityBuilder.createScreenCaptureFromPath(ExtentReporter.takeScreenshot()).build());
+        ExtentReportManager.getTest().getModel().setEndTime(getTime(result.getEndMillis()));
     }
 
     @Override

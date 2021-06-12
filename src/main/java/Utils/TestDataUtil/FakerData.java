@@ -1,4 +1,4 @@
-package Utils.DataUtil;
+package Utils.TestDataUtil;
 
 import java.util.Locale;
 import java.util.Random;
@@ -28,7 +28,7 @@ public final class FakerData {
 	public String getPhoneNumber() {
 		faker = new Faker(new Locale("en-IND"));
 		PhoneNumber number = faker.phoneNumber();
-		String phoneNumber = number.phoneNumber().replace("\\+91", "").replace("-","");
+		String phoneNumber = number.phoneNumber().replace("+91","").replace("-","");
 		if(phoneNumber.startsWith("00"))  getPhoneNumber();
 		return phoneNumber;
 	}

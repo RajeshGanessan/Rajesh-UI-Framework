@@ -7,25 +7,38 @@
     <listeners>
         <listener class-name="Listeners.ExtentReportListeners"> </listener>
     </listeners>
-    <test name="Chrome - Admin Login Tests">
+    <test name="Chrome - Regression Tests = MyStartupEquity">
         <parameter name="Browser" value="chrome" />
         <classes>
-            <class name="com.MyStartupEquity.Tests.LoginTest" />
-<!--            <class name="com.MyStartupEquity.Tests.DashboardPageTest" />-->
-<!--            <class name="com.MyStartupEquity.Tests.EquitySchemePageTest"/>-->
-             <class name="com.MyStartupEquity.Tests.VestingSchedulePageTest"/>
-            <class name="com.MyStartupEquity.Tests.EmployeesPageTest"/>
-            <class name="com.MyStartupEquity.Tests.grantOptionTest"/>
+<!--            <class name="com.MyStartupEquity.Tests.LoginTest" />-->
+<!--            <class name="com.MyStartupEquity.Tests.DashboardPageTest"/>-->
+<!--            <class name="com.MyStartupEquity.Tests.EmployeesPageTest"/>-->
+<!--            <class name="com.MyStartupEquity.Tests.grantOptionTest"/>-->
             <class name="com.MyStartupEquity.Tests.pendingRequestTest"/>
-             <class name="com.MyStartupEquity.Tests.VestingTablePageTest"/>
-             <class name="com.MyStartupEquity.Tests.ReportsPageTest"/>
-<!--                 <class name="com.MyStartupEquity.Tests.ExerciseOptionPageTest"/>-->
+<!--             <class name="com.MyStartupEquity.Tests.AllGrantsPageTest"/>-->
+<!--            <class name="com.MyStartupEquity.Tests.ReportsPageTest"/>-->
+<!--             <class name="com.MyStartupEquity.Tests.ExerciseOptionPageTest"/>-->
+<!--            <class name="com.MyStartupEquity.Tests.EmployeeHomePageTest"/>-->
+<!--            <class name="com.MyStartupEquity.Tests.EmployeeExitPageTest"/>-->
         </classes>
     </test>
-<!--    <test name="Chrome - Employee login" enabled="false">-->
-<!--        <parameter name="Browser" value="chrome"/>-->
+
+
+<!--    <test name="Chrome - All Tests = MyStartupEquity" enabled="false">-->
+<!--        <parameter name="Browser" value="chrome" />-->
 <!--        <classes>-->
-<!--            <class name="com.MyStartupEquity.Tests.EmployeeHomePageTest"/>-->
+<!--                        <class name="com.MyStartupEquity.Tests.LoginTest" />-->
+<!--                       <class name="com.MyStartupEquity.Tests.EquitySchemePageTest"/>-->
+<!--                        <class name="com.MyStartupEquity.Tests.VestingSchedulePageTest"/>-->
+<!--                        <class name="com.MyStartupEquity.Tests.EmployeesPageTest"/>-->
+<!--                        <class name="com.MyStartupEquity.Tests.grantOptionTest"/>-->
+<!--                        <class name="com.MyStartupEquity.Tests.pendingRequestTest"/>-->
+<!--                         <class name="com.MyStartupEquity.Tests.AllGrantsPageTest"/>-->
+<!--                        <class name="com.MyStartupEquity.Tests.ReportsPageTest"/>-->
+<!--                         <class name="com.MyStartupEquity.Tests.ExerciseOptionPageTest"/>-->
+<!--                        <class name="com.MyStartupEquity.Tests.EmployeeHomePageTest"/>-->
+<!--                        <class name="com.MyStartupEquity.Tests.EmployeeExitPageTest"/>-->
+
 <!--        </classes>-->
 <!--    </test>-->
 </suite>

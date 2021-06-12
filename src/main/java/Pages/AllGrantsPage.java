@@ -16,38 +16,39 @@ public class AllGrantsPage {
         helperMethods = new HelperMethods(driver);
     }
 
-    private By vestingTableHeader = By.xpath("//div[@class='page_title']");
-    private By searchBar = By.cssSelector("input[name$='vesting_search_query']");
-    private By searchBtn = By.xpath("//button[text()='Search']");
-    private By menuButton = By.xpath("//tr[1]//button[@aria-controls='long-menu']");
-    private By cancelGrantBtn = By.xpath("//div[@role='presentation'][1]//child::li");
-    private By employeeFromList = By.xpath("//tr[1]/td[contains(@class,'employee_name')]");
-    private By cancellationModal = By.xpath("//div[@class='modal-title']");
-    private By confirmCancel = By.xpath("//button[@form='cancel_grant']");
-    private By cancelReasonField = By.xpath("//textarea[@name='cancelGrantReason']");
-    private By reportsMenu = By.xpath("//a[contains(text(),'Reports')]");
-    private By successMessage = By.xpath("//div[contains(text(),'Grant cancelled successfully')]");
-
+    private final By vestingTableHeader = By.xpath("//div[@class='page_title']");
+    private final By cancelMenuBtn = By.xpath("//tr/td[position()=7 and contains(text(),'Pending')]//following-sibling::td[contains(@class,'row-action')]//button");
+    private final By cancelGrantBtn = By.xpath("//div[@role='presentation']//child::li[text()='Cancel Grant']");
+    private final By cancellationModal = By.xpath("//div[@class='modal-title']");
+    private final By confirmCancel = By.xpath("//button[@form='cancel_grant']");
+    private final By cancelReasonField = By.xpath("//textarea[@name='cancelGrantReason']");
+    private final By reportsMenu = By.xpath("//a[contains(text(),'Reports')]");
+    private final By successMessage = By.xpath("//div[contains(text(),'Grant cancelled successfully')]");
 
     public String getPageHeader() {
         return elementUtils.doGetText(vestingTableHeader);
     }
 
-    public void clickCancelGrant() {
-        elementUtils.doClick(menuButton);
-        elementUtils.waitForElementVisibility(cancelGrantBtn);
-        elementUtils.doClick(cancelGrantBtn);
+
+    public AllGrantsPage clickCancelGrants(){
+        elementUtils.doClick(cancelMenuBtn);
+        if(elementUtils.doIsDisplayed(cancelGrantBtn)){
+            elementUtils.doClick(cancelGrantBtn);
+        }
+        return this;
     }
 
-    public void enterCancellationReason(String cancellationReason){
+    public AllGrantsPage enterCancellationReason(String cancellationReason){
         if(elementUtils.doIsDisplayed(cancellationModal)) {
             elementUtils.doSendKeys(cancelReasonField, cancellationReason);
         }
+        return this;
     }
 
-    public void confirmCancellation(){
+    public AllGrantsPage confirmCancellation(){
        if (elementUtils.doIsDisplayed(confirmCancel))
            elementUtils.doClick(confirmCancel);
+       return this;
     }
 
     public Boolean checkSuccessMessage(){

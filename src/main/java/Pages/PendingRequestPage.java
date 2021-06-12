@@ -34,7 +34,7 @@ public class PendingRequestPage extends Base {
 	private final By allGrantsNav = By.xpath("//a[contains(text(),'All Grants')]");
 	private final By signEasyFrame = By.xpath("//div[@class='PSPDFKit-Container']//iframe");
 	private final By SignConfirm = By.xpath("//div[@class='all-done']/span");
-    private static String currentWindow = "";
+    private  String currentWindow = "";
 
 
     public String getPageTitle(){
@@ -84,8 +84,8 @@ public class PendingRequestPage extends Base {
             Set<String> allWindows = driver.getWindowHandles();
             for (String actual : allWindows) {
                 if (!actual.equalsIgnoreCase(currentWindow))
-                    driver.switchTo().window(actual);
-                    isSwitched = true;
+                    driver.switchTo().window(actual);{
+                    isSwitched = true;}
             }
         } catch (Exception e) {
             e.printStackTrace();

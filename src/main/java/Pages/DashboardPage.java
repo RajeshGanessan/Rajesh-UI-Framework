@@ -32,9 +32,7 @@ public class DashboardPage extends Base {
 
 	//functionMethods
 	public String getFooterText() throws InterruptedException {
-		elementUtils.staticWait(2000);
-		helperMethods.scrollDownComplete();
-
+		helperMethods.scrollIntoView(elementUtils.getElement(footerText));
 		return elementUtils.doGetText(footerText);
 	}
 

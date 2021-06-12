@@ -1,19 +1,11 @@
-package Utils.DataUtil;
+package Utils.TestDataUtil;
 
 import java.io.*;
 
-import Utils.AppConstants;
-import com.github.javafaker.App;
-import org.apache.poi.ss.usermodel.CellValue;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.testng.annotations.Test;
-
-import static Base.BaseTest.*;
 
 public class ExcelUtils {
 
@@ -23,11 +15,10 @@ public class ExcelUtils {
 	static XSSFSheet sheet;
 	static FileInputStream file;
 	static FileOutputStream outputFile;
-	private static final String TEST_DATA_FILEPATH = System.getProperty("user.dir") + "/src/main/java/TestData/ExcelData.xlsx";
+	private static final String TEST_DATA_FILEPATH = System.getProperty("user.dir") + File.separator+ "resources"+File.separator +"TestData/ExcelData.xlsx";
 
 	public ExcelUtils(String sheetName) {
-		try {
-				file = new FileInputStream(new File(TEST_DATA_FILEPATH));
+		try(FileInputStream file = new FileInputStream(TEST_DATA_FILEPATH)){
 				workbook = new XSSFWorkbook(file);
 				sheet = workbook.getSheet(sheetName);
 				System.out.println(sheet.getSheetName());
@@ -99,7 +90,7 @@ public class ExcelUtils {
 			}
 			file.close();
 			outputFile = new FileOutputStream(
-					new File(TEST_DATA_FILEPATH));
+					(TEST_DATA_FILEPATH));
 			workbook.write(outputFile);
 			outputFile.flush();
 			outputFile.close();

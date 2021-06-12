@@ -1,13 +1,15 @@
 package com.MyStartupEquity.Tests;
 
+import Enums.ConfigProperties;
 import Pages.GrantOptionPage;
-import Utils.ReadProperty;
+import Utils.PropertyUtils.ReadProperty;
+import org.testng.IMethodInterceptor;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import Base.BaseTest;
 import Pages.EmployeesPage;
-import Utils.AppConstants;
+import Constants.AppConstants;
 import junit.framework.Assert;
 
 public class grantOptionTest extends BaseTest {
@@ -18,7 +20,7 @@ public class grantOptionTest extends BaseTest {
 	@BeforeClass
 	public void setup() {
 //		getData = new ExcelUtils("GrantOptions");
-		loginPage.doLogin(ReadProperty.getProperty("email"),ReadProperty.getProperty("password"));
+		loginPage.doLogin(ReadProperty.getProperty(ConfigProperties.EMAIL),ReadProperty.getProperty(ConfigProperties.PASSWORD));
 		employeesPage = new EmployeesPage(driver);
 		grantOptionsPage = employeesPage.goToGrantOptionsPage();
 	}
@@ -37,8 +39,8 @@ public class grantOptionTest extends BaseTest {
 		grantOptionsPage.selectTypeOfGrant(GrantOptionPage.GrantType.EXISTINGGRANT);
 		grantOptionsPage.uploadGrantLetter();
 		grantOptionsPage.selectGrantDate("Existing");
-		grantOptionsPage.enterOptionsGranted("30");
-		grantOptionsPage.enterExercisePrice("120.45");
+		grantOptionsPage.enterOptionsGranted();
+		grantOptionsPage.enterExercisePrice();
 		grantOptionsPage.confirmGrant();
 		Assert.assertTrue("Existing Grant Creation Failed", grantOptionsPage.checkSuccessMessage());
 	}
@@ -51,8 +53,8 @@ public class grantOptionTest extends BaseTest {
 		grantOptionsPage.setSelectVestingField("Vesting annual");
 		grantOptionsPage.selectTypeOfGrant(GrantOptionPage.GrantType.FRESHGRANT);
 		grantOptionsPage.selectGrantDate("Fresh");
-		grantOptionsPage.enterOptionsGranted("30");
-		grantOptionsPage.enterExercisePrice("120.45");
+		grantOptionsPage.enterOptionsGranted();
+		grantOptionsPage.enterExercisePrice();
 		grantOptionsPage.confirmGrant();
 		Assert.assertTrue("Fresh Grant Creation Failed", grantOptionsPage.checkSuccessMessage());
 	}

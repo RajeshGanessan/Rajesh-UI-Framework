@@ -1,11 +1,12 @@
 package com.MyStartupEquity.Tests;
 
 import Base.BaseTest;
+import Enums.ConfigProperties;
 import Pages.AllGrantsPage;
 import Pages.ReportsPage;
-import Utils.AppConstants;
-import Utils.DataUtil.DataProviderManager;
-import Utils.ReadProperty;
+import Constants.AppConstants;
+import Utils.TestDataUtil.DataProviderManager;
+import Utils.PropertyUtils.ReadProperty;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -18,7 +19,7 @@ public class ReportsPageTest extends BaseTest {
 
     @BeforeClass
     public void setup(){
-        loginPage.doLogin(ReadProperty.getProperty("email"),ReadProperty.getProperty("password"));
+        loginPage.doLogin(ReadProperty.getProperty(ConfigProperties.EMAIL),ReadProperty.getProperty(ConfigProperties.PASSWORD));
         allGrantsPage = new AllGrantsPage(driver);
         reportsPage = allGrantsPage.goToReportsPage();
     }
@@ -31,24 +32,24 @@ public class ReportsPageTest extends BaseTest {
 
     @Test(priority = 2,description = "verify Grant-Report")
     public void verifyGrantReport(){
-        reportsPage.SelectReportType("Grant Report");
+        reportsPage.selectReportType("Grant Report");
         reportsPage.selectStartDate("January","1");
         reportsPage.selectEndDate();
-         boolean isFileDownloaded = reportsPage.verifyFileDownload(AppConstants.fileDownloadPath);
+         boolean isFileDownloaded = reportsPage.verifyFileDownload(AppConstants.FILEDOWNLOADPATH);
          Assert.assertTrue(isFileDownloaded);
     }
 
     @Test(priority = 3,description = "verify Transaction",dataProvider = "TransactionTypes",dataProviderClass = DataProviderManager.class)
     public void verifyTransactionReport(String transactionType){
-        reportsPage.SelectReportType("Transactions Report",transactionType);
+        reportsPage.selectReportType("Transactions Report",transactionType);
         reportsPage.selectStartDate("January","1");
         reportsPage.selectEndDate();
-        boolean isFileDownloaded = reportsPage.verifyFileDownload(AppConstants.fileDownloadPath);
+        boolean isFileDownloaded = reportsPage.verifyFileDownload(AppConstants.FILEDOWNLOADPATH);
         Assert.assertTrue(isFileDownloaded);
     }
 
-    @AfterMethod(description = "Deleting the Downloaded Reports")
-    public void deleteReportFile(){
-        reportsPage.isFileDeleted();
-    }
+//    @AfterMethod(description = "Deleting the Downloaded Reports")
+//    public void deleteReportFile(){
+//        reportsPage.isFileDeleted();
+//    }
 }

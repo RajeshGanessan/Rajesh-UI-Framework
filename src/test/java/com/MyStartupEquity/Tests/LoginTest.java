@@ -1,11 +1,12 @@
 package com.MyStartupEquity.Tests;
 
 
-import Utils.ReadProperty;
+import Enums.ConfigProperties;
+import Utils.PropertyUtils.ReadProperty;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import Base.BaseTest;
-import Utils.AppConstants;
+import Constants.AppConstants;
 
 public class LoginTest extends BaseTest {
 
@@ -30,7 +31,7 @@ public class LoginTest extends BaseTest {
 	}
 	@Test(priority = 3,description = "Login flow")
 	public void logging_In() {
-		loginPage.doLogin(ReadProperty.getProperty("email"),ReadProperty.getProperty("password"));
+		loginPage.doLogin(ReadProperty.getProperty(ConfigProperties.EMAIL),ReadProperty.getProperty(ConfigProperties.PASSWORD));
 	}
 
 }

@@ -1,23 +1,22 @@
 package Base;
 
-import java.net.MalformedURLException;
-
+import Enums.ConfigProperties;
 import Pages.LoginPage;
-import Utils.DataUtil.ExcelUtils;
-import Utils.DataUtil.FakerData;
-import Utils.PageUtils.HelperMethods;
-import Utils.ReadProperty;
+import Utils.TestDataUtil.ExcelUtils;
+import Utils.TestDataUtil.FakerData;
+import Utils.PropertyUtils.ReadProperty;
 import org.apache.commons.mail.EmailException;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-import Listeners.MailTriggerAPI;
+import Utils.EmailUtil.MailTriggerAPI;
+
+import java.net.MalformedURLException;
 
 public class  BaseTest {
 
     public WebDriver driver;
     public Base base;
     public LoginPage loginPage;
-    public HelperMethods helperMethods;
     public MailTriggerAPI mailAPI;
     public  ExcelUtils getData;
     public FakerData faker;
@@ -27,24 +26,24 @@ public class  BaseTest {
     public void setup(String browserName) {
 
         base = new Base();
-//        prop = base.initProp();
         ReadProperty.setProperty("browser", browserName);
         driver = base.initDriver();
-        helperMethods = new HelperMethods(driver);
         loginPage = new LoginPage(driver);
 
     }
 
 //    // Sending ExecutionReportMail
-//	@AfterSuite
-//	public void SendReportMail() throws MalformedURLException, EmailException {
-//        mailAPI = new MailTriggerAPI();
-//        mailAPI.SendEmail();
-//	}
+	@AfterSuite
+	public void sendReportMail() throws MalformedURLException, EmailException {
+        if(Boolean.parseBoolean(ReadProperty.getProperty(ConfigProperties.SENDREPORT))) {
+            mailAPI = new MailTriggerAPI();
+            mailAPI.sendEmail();
+        }
+	}
 
     // for quitting browser
     @AfterClass
-    public void TearDown() {
+    public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
