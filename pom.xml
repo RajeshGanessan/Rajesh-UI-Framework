@@ -118,7 +118,7 @@
 			<!--				<version>3.0.0-M4</version> <configuration> <suiteXmlFiles> <suiteXmlFile>src/main/resources/TestRunner/testng.xml</suiteXmlFile>-->
 			<!--				</suiteXmlFiles> <systemPropertyVariables> <propertyName>${browser}</propertyName>-->
 			<!--				<propertyName>${email}</propertyName> <propertyName>${password}</propertyName>-->
-			<!--				</systemPropertyVariables> </configuration>-->
+			<!--				</systemPropetyVariables> </configuration> werwer-->
 			<!--			 </plugin>-->
 
 			<plugin>
