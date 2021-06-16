@@ -29,7 +29,7 @@ public class VestingTablePageTest extends BaseTest {
 
     @Test(priority = 2,description = "Cancelling a grant")
     public void verifyGrantCancellation(){
-        allGrantsPage.clickCancelGrant();
+        allGrantsPage.clickCancelGrants();
         allGrantsPage.enterCancellationReason("Grant is cancelled");
         allGrantsPage.confirmCancellation();
         allGrantsPage.checkSuccessMessage();

@@ -21,7 +21,7 @@ public class  BaseTest {
     public  ExcelUtils getData;
     public FakerData faker;
 
-    @Parameters("Browser")
+    @Parameters("browser")
     @BeforeClass
     public void setup(String browserName) {
 
@@ -35,10 +35,10 @@ public class  BaseTest {
 //    // Sending ExecutionReportMail
 	@AfterSuite
 	public void sendReportMail() throws MalformedURLException, EmailException {
-        if(Boolean.parseBoolean(ReadProperty.getProperty(ConfigProperties.SENDREPORT))) {
-            mailAPI = new MailTriggerAPI();
-            mailAPI.sendEmail();
-        }
+//        if(Boolean.parseBoolean(ReadProperty.getProperty(ConfigProperties.SENDREPORT))) {
+//            mailAPI = new MailTriggerAPI();
+//            mailAPI.sendEmail();
+//        }
 	}
 
     // for quitting browser

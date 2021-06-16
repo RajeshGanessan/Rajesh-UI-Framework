@@ -129,10 +129,6 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/TestRunner/testngSmoke.xml</suiteXmlFile>
 					</suiteXmlFiles>
-					<systemPropertyVariables>
-						<!--suppress UnresolvedMavenProperty -->
-						<browser>${browser}</browser>
-					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 

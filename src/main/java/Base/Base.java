@@ -46,6 +46,7 @@ public class Base {
             } else{
                 browserName = System.getProperty("browser");
             }
+
             System.out.println("Running on ---> " + browserName + " browser");
 
             optionsManager = new OptionsManager();
