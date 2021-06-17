@@ -10,7 +10,7 @@
     <test name="Chrome - Regression Tests = MyStartupEquity">
         <parameter name="browser" value="chrome" />
         <classes>
-            <class name="com.MyStartupEquity.Tests.LoginTest" />
+            <class name="com.MyStartupEquity.Tests.LoginTest"/>
 <!--            <class name="com.MyStartupEquity.Tests.DashboardPageTest"/>-->
 <!--            <class name="com.MyStartupEquity.Tests.EmployeesPageTest"/>-->
 <!--            <class name="com.MyStartupEquity.Tests.grantOptionTest"/>-->
