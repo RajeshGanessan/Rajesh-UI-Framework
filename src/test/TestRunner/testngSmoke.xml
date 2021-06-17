@@ -11,9 +11,9 @@
         <parameter name="browser" value="chrome" />
         <classes>
             <class name="com.MyStartupEquity.Tests.LoginTest"/>
-<!--            <class name="com.MyStartupEquity.Tests.DashboardPageTest"/>-->
-<!--            <class name="com.MyStartupEquity.Tests.EmployeesPageTest"/>-->
-<!--            <class name="com.MyStartupEquity.Tests.grantOptionTest"/>-->
+            <class name="com.MyStartupEquity.Tests.DashboardPageTest"/>
+            <class name="com.MyStartupEquity.Tests.EmployeesPageTest"/>
+            <class name="com.MyStartupEquity.Tests.grantOptionTest"/>
 <!--            <class name="com.MyStartupEquity.Tests.pendingRequestTest"/>-->
 <!--             <class name="com.MyStartupEquity.Tests.AllGrantsPageTest"/>-->
 <!--            <class name="com.MyStartupEquity.Tests.ReportsPageTest"/>-->
