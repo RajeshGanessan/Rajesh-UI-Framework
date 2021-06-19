@@ -19,6 +19,8 @@ pipeline {
                 success {
                     junit '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.jar'
+
+                    emailext body: 'Checking the pipeline orchestration', subject: 'Pipeline Completed - Jenkins', to: 'rajeshg.gmx@gmail.com'
                 }
             }
         }
