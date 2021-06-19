@@ -1,32 +1,38 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello World'
-            }
-        }
-
-        stage('Test'){
-            steps {
-                 echo 'Performing tests'
-            }
-        }
-
-        stage('Deploy'){
-            steps{
-                 echo 'Deploying the application'
-            }
-        }
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "MAVEN_HOME"
     }
 
-    post{
+    stages {
+        stage('Pulling from git ') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/RajeshGanessan/MSE-UI-Framework.git'
 
-            always
-            {
-            emailext body: 'Checking the pipeline orchestration', subject: 'Pipeline Completed - Jenkins', to: 'rajeshg.gmx@gmail.com'
+            }
+            steps {
+                // Run Maven on a Unix agent.
+                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+
             }
 
+        }
+
+            post {
+                // If Maven was able to run the tests, even if some of the test
+                // failed, record the test results and archive the jar file.
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+
+                    emailext body: 'Checking the pipeline orchestration', subject: 'Pipeline Completed - Jenkins', to: 'rajeshg.gmx@gmail.com'
+                }
+
+
+            }
+        }
     }
 }
