@@ -2,7 +2,7 @@ package Pages;
 
 import Utils.PageUtils.DynamicXpath;
 import Utils.PageUtils.ElementUtils;
-import Utils.PageUtils.HelperMethods;
+import Utils.PageUtils.HelperComponents;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -14,7 +14,7 @@ public class EmployeeExitPage {
 
     private WebDriver driver;
     ElementUtils elementUtils;
-    HelperMethods helperMethods;
+    HelperComponents helperComponents;
 
     private LocalDate localDate = LocalDate.now();
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
@@ -22,7 +22,7 @@ public class EmployeeExitPage {
     public EmployeeExitPage(WebDriver driver) {
         this.driver = driver;
         elementUtils = new ElementUtils(driver);
-        helperMethods = new HelperMethods(driver);
+        helperComponents = new HelperComponents(driver);
     }
 
     private final By exitPageHeader = By.xpath("//div[@class='page_title']");
@@ -54,12 +54,12 @@ public class EmployeeExitPage {
     public void selectEmployeeFromList(String empToSelect){
         if(elementUtils.doIsDisplayed(exitPageHeader)) {
             elementUtils.doClick(startEmpExitBtn);
-            helperMethods.selectRandomValueFromList(empToSelect, selectEmployeeField);
+            helperComponents.selectRandomValueFromList(empToSelect, selectEmployeeField);
         }
     }
 
     public void selectExitReasonFromList(String exitReasonToSelect){
-        helperMethods.selectFromDropdown(exitReasonToSelect,selectExitReasonField);
+        helperComponents.selectFromDropdown(exitReasonToSelect,selectExitReasonField);
     }
 
     private String getLastWorkingDate(){

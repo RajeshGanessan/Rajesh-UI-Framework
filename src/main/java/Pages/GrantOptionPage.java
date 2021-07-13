@@ -8,7 +8,7 @@ import java.util.Random;
 import Base.Base;
 import Enums.ConfigProperties;
 import Utils.PageUtils.ElementUtils;
-import Utils.PageUtils.HelperMethods;
+import Utils.PageUtils.HelperComponents;
 import Utils.PropertyUtils.ReadProperty;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidArgumentException;
@@ -23,7 +23,7 @@ public class GrantOptionPage extends Base {
     private WebDriver driver;
     private Random random;
     ElementUtils elementUtils;
-    HelperMethods helperMethods;
+    HelperComponents helperComponents;
 
 
 	private final DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("MMMM d, yyyy");
@@ -55,7 +55,7 @@ public class GrantOptionPage extends Base {
 	public GrantOptionPage(WebDriver driver){
 	    this.driver =  driver;
 	    elementUtils = new ElementUtils(driver);
-	    helperMethods = new HelperMethods(driver);
+	    helperComponents = new HelperComponents(driver);
 	}
 
 	public enum GrantType{
@@ -65,23 +65,23 @@ public class GrantOptionPage extends Base {
 
 	public void selectEmployeeFromList(String empToSelect){
 		if(elementUtils.doIsDisplayed(grantOptionsHeader))
-		helperMethods.selectRandomValueFromList(empToSelect,selectEmployee);
+		helperComponents.selectRandomValueFromList(empToSelect,selectEmployee);
 	    }
 
     public void selectEquityScheme(String schemeToSelect){
-		helperMethods.selectFromDropdown(schemeToSelect,selectScheme);
+		helperComponents.selectFromDropdown(schemeToSelect,selectScheme);
 	}
 
     public void setSelectVestingField(String vestingToSelect){
-		helperMethods.selectFromDropdown(vestingToSelect,selectVestingField);
+		helperComponents.selectFromDropdown(vestingToSelect,selectVestingField);
 	}
 
     public void selectTypeOfGrant(GrantType typeOfGrant){
 			if (typeOfGrant.equals(GrantType.FRESHGRANT)) {
-				helperMethods.selectFromDropdown("Fresh Grant",
+				helperComponents.selectFromDropdown("Fresh Grant",
 						selectTypeOfGrantField);
 			} else if(typeOfGrant.equals(GrantType.EXISTINGGRANT)) {
-				helperMethods.selectFromDropdown("Grant letter has been signed physically by the Employee",
+				helperComponents.selectFromDropdown("Grant letter has been signed physically by the Employee",
 						selectTypeOfGrantField);
 			} else throw new InvalidArgumentException("The given Grant type is not correct, Check once");
 		}
@@ -94,12 +94,12 @@ public class GrantOptionPage extends Base {
 					((RemoteWebDriver) driver).setFileDetector(new LocalFileDetector());
 				}
 			}
-			elementUtils.doSendKeys(exisitingGrantLetter,helperMethods.getRandomFile());
+			elementUtils.doSendKeys(exisitingGrantLetter, helperComponents.getRandomFile());
 		}
 	}
 
 	public void enterOptionsGranted(){
-		helperMethods.scrollIntoView(elementUtils.getElement(grantOptionField));
+		helperComponents.scrollIntoView(elementUtils.getElement(grantOptionField));
 		elementUtils.doSendKeys(grantOptionField,getOptionsGranted());
 	}
 
@@ -108,7 +108,7 @@ public class GrantOptionPage extends Base {
 	}
 
 	public void confirmGrant(){
-		helperMethods.scrollIntoView(elementUtils.getElement(grantOptionButton));
+		helperComponents.scrollIntoView(elementUtils.getElement(grantOptionButton));
 		elementUtils.doClick(grantOptionButton);
 		if(elementUtils.doIsDisplayed(previewGrantOptionBox)){
 			elementUtils.doClick(grantConfirmButton);
@@ -118,7 +118,7 @@ public class GrantOptionPage extends Base {
 	// Selecting year from dropdown
 	private void selectYear(String typeOfGrant) {
 		By arrow = typeOfGrant.contains("Fresh") ? arrowUp : arrowDown;
-		helperMethods.moveToElement(arrow);
+		helperComponents.moveToElement(arrow);
 			 for(int i=0;i<3;i++){
 			 	elementUtils.doClick(arrow);
 			 }
@@ -185,7 +185,7 @@ public class GrantOptionPage extends Base {
 
 //	navigating to the Pending request page
 	public PendingRequestPage goToPendingRequestPage() {
-		helperMethods.scrollIntoView(elementUtils.getElement(pendingRequestNav));
+		helperComponents.scrollIntoView(elementUtils.getElement(pendingRequestNav));
 		elementUtils.clickElementByJS(pendingRequestNav);
 		return new PendingRequestPage(driver);
 	}

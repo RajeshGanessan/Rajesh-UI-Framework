@@ -5,7 +5,7 @@ import java.net.URL;
 
 import Base.BaseTest;
 import Constants.AppConstants;
-import Utils.PageUtils.HelperMethods;
+import Utils.PageUtils.HelperComponents;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
@@ -17,7 +17,7 @@ public class MailTriggerAPI extends BaseTest {
 	public  void sendEmail() throws EmailException, MalformedURLException {
 
 
-		String filePath = HelperMethods.lastFileModified(System.getProperty("user.dir") + "/Build-Reports");
+		String filePath = HelperComponents.lastFileModified(System.getProperty("user.dir") + "/Build-Reports");
 
 		//HTML Email template
 		String htmlContent = "<!DOCTYPE html><html lang=\"en\">"

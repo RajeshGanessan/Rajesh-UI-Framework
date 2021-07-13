@@ -3,7 +3,7 @@ package Pages;
 import Base.Base;
 import Utils.TestDataUtil.ExcelUtils;
 import Utils.PageUtils.ElementUtils;
-import Utils.PageUtils.HelperMethods;
+import Utils.PageUtils.HelperComponents;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
@@ -13,12 +13,12 @@ public class EquitySchemePage extends Base {
 
     WebDriver driver;
     ElementUtils elementUtils;
-    HelperMethods helperMethods;
+    HelperComponents helperComponents;
 
 	public EquitySchemePage(WebDriver driver) {
 	    this.driver = driver;
 	    elementUtils = new ElementUtils(driver);
-	    helperMethods = new HelperMethods(driver);
+	    helperComponents = new HelperComponents(driver);
 	    getData = new ExcelUtils("ESOPscheme");
 	}
 
@@ -54,9 +54,9 @@ public class EquitySchemePage extends Base {
 	//selecting Type of Scheme
 	private void selectTypeOfScheme(SchemeTypes typeOfScheme){
 		if(typeOfScheme == SchemeTypes.ESOP){
-			helperMethods.selectFromDropdown("ESOP Scheme",selectSchemeType);
+			helperComponents.selectFromDropdown("ESOP Scheme",selectSchemeType);
 		} else if(typeOfScheme == SchemeTypes.SAR){
-			helperMethods.selectFromDropdown("stock",selectSchemeType);
+			helperComponents.selectFromDropdown("stock",selectSchemeType);
 		} else {
 			throw new InvalidArgumentException("Pls check the scheme type!!");
 		}
@@ -76,16 +76,16 @@ public class EquitySchemePage extends Base {
 	//Filling Details for scheme
 	public boolean fillingSchemeDetails(String schemeNameData,String schemeID,String poolSize) {
     	boolean isEmpAdded;
-		int randomNum = helperMethods.getRandomNumber();
+		int randomNum = helperComponents.getRandomNumber();
 		schemeNameData = schemeNameData + randomNum;
 		schemeID = schemeID + randomNum;
 		elementUtils.doSendKeys(schemeName, schemeNameData);
 		elementUtils.doSendKeys(schemeId, schemeID);
 		selectEquitySchemeDate();
-		helperMethods.scrolltoBottomOfPage();
-		elementUtils.doSendKeys(shareHolderDoc, helperMethods.getRandomFile());
+		helperComponents.scrolltoBottomOfPage();
+		elementUtils.doSendKeys(shareHolderDoc, helperComponents.getRandomFile());
 		elementUtils.doSendKeys(schemePoolSize, poolSize);
-		elementUtils.doSendKeys(esopSchemeDoc, helperMethods.getRandomFile());
+		elementUtils.doSendKeys(esopSchemeDoc, helperComponents.getRandomFile());
 		if (elementUtils.doIsDisplayed(createSchBtm)) {elementUtils.doClick(createSchBtm);}
 		if(elementUtils.doIsDisplayed(confirmationModal)){elementUtils.doClick(confirmButton);}
 		isEmpAdded = checkSuccessMessageValidation();
@@ -103,7 +103,7 @@ public class EquitySchemePage extends Base {
 
 	// Selecting EsopSchemeDate
 	public void selectEquitySchemeDate() {
-    	helperMethods.selectDateFromCalender(arrowDown,esopDate,calenderTitle);
+    	helperComponents.selectDateFromCalender(arrowDown,esopDate,calenderTitle);
 	}
 
 	// checking expanded View

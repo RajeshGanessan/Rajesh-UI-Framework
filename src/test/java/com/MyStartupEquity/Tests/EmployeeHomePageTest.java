@@ -45,7 +45,7 @@ public class EmployeeHomePageTest extends BaseTest {
 
     @Test(priority = 3, description = "DownloadingDashboardReport")
     public void verifyDashboardReportDownload(){
-        boolean isDownloaded = employeeHomePage.verifyFileDownload(AppConstants.FILEDOWNLOADPATH);
+        boolean isDownloaded = employeeHomePage.verifyFileDownload(AppConstants.FILEDOWNLOADPATH_CHROME);
         Assert.assertTrue(isDownloaded);
     }
 

@@ -1,6 +1,6 @@
 package Pages;
 import Utils.PageUtils.ElementUtils;
-import Utils.PageUtils.HelperMethods;
+import Utils.PageUtils.HelperComponents;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -8,12 +8,12 @@ public class AllGrantsPage {
 
     private final WebDriver driver;
     ElementUtils elementUtils;
-    HelperMethods helperMethods;
+    HelperComponents helperComponents;
 
     public AllGrantsPage(WebDriver driver) {
         this.driver = driver;
         elementUtils = new ElementUtils(driver);
-        helperMethods = new HelperMethods(driver);
+        helperComponents = new HelperComponents(driver);
     }
 
     private final By vestingTableHeader = By.xpath("//div[@class='page_title']");

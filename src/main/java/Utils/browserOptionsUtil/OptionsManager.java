@@ -4,6 +4,7 @@ import Constants.AppConstants;
 import Utils.PropertyUtils.ReadProperty;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,17 +29,26 @@ public class OptionsManager {
     //To get FireFox options
     public FirefoxOptions getFirefoxOptions(){
         firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setProfile(setDownloadFilePropertiesFirefox());
         if(Boolean.parseBoolean(ReadProperty.getProperty("headless"))) firefoxOptions.addArguments("--headless");
         return firefoxOptions;
     }
 
+    //Setting Custom download path for chrome
     private void setDownloadFilePropertiesChrome(){
         Map<String,Object> prefs = new HashMap<>();
-
         prefs.put("profile.default_content_settings.popups",0);
-        prefs.put("download.default_directory", AppConstants.FILEDOWNLOADPATH);
-
+        prefs.put("download.default_directory", AppConstants.FILEDOWNLOADPATH_CHROME);
         chromeoptions.setExperimentalOption("prefs",prefs);
+    }
+
+    //Setting custom download path for firefox
+    private FirefoxProfile setDownloadFilePropertiesFirefox(){
+        FirefoxProfile profile = new FirefoxProfile();
+        profile.setPreference("browser.download.folderList", 2);
+        profile.setPreference("browser.download.dir",AppConstants.FILEDOWNLOADPATH_FIREFOX);
+        profile.setPreference("browser.helperApps.neverAsk.saveToDisk","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        return profile;
     }
 
 }

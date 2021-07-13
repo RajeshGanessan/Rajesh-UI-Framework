@@ -3,14 +3,12 @@ package Pages;
 import Base.Base;
 import Utils.PageUtils.DynamicXpath;
 import Utils.PageUtils.ElementUtils;
-import Utils.PageUtils.HelperMethods;
+import Utils.PageUtils.HelperComponents;
 import com.google.common.util.concurrent.Uninterruptibles;
-import lombok.NonNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -18,13 +16,13 @@ public class ExerciseOptionsPage extends Base {
 
     private WebDriver driver;
     ElementUtils elementUtils;
-    HelperMethods helperMethods;
+    HelperComponents helperComponents;
 
 
     public ExerciseOptionsPage(WebDriver driver) {
         this.driver = driver;
         elementUtils = new ElementUtils(driver);
-        helperMethods = new HelperMethods(driver);
+        helperComponents = new HelperComponents(driver);
     }
 
     private final By allGrantsTableRows = By.xpath("//tbody[@class='table-body']/tr");
@@ -74,12 +72,12 @@ public class ExerciseOptionsPage extends Base {
     }
 
     public ExerciseOptionsPage selectExerciseDate(){
-        helperMethods.selectDateFromCalender(arrowDown,exerciseDateBox,calenderTitle);
+        helperComponents.selectDateFromCalender(arrowDown,exerciseDateBox,calenderTitle);
         return this;
     }
 
     public ExerciseOptionsPage uploadExerciseLetter(){
-        elementUtils.doSendKeys(uploadFileBtn, helperMethods.getRandomFile());
+        elementUtils.doSendKeys(uploadFileBtn, helperComponents.getRandomFile());
         return this;
     }
 
@@ -90,7 +88,7 @@ public class ExerciseOptionsPage extends Base {
 
     private String getOptionsToBeExercised(){
         int optionsVested = Integer.parseInt(elementUtils.doGetText(optionsVestedCount));
-        return helperMethods.getRandomVestedOptionValue(optionsVested);
+        return helperComponents.getRandomVestedOptionValue(optionsVested);
     }
 
     public ExerciseOptionsPage goToEmployeeDetails()  {
@@ -113,14 +111,14 @@ public class ExerciseOptionsPage extends Base {
 
     public boolean goToExerciseOptionsPage(){
         if(!elementUtils.doIsDisplayed(exerciseOptionsPageButton)) {
-            helperMethods.scrollIntoView(elementUtils.getElement(exerciseOptionsPageButton));}
+            helperComponents.scrollIntoView(elementUtils.getElement(exerciseOptionsPageButton));}
             elementUtils.doClick(exerciseOptionsPageButton);
             return elementUtils.doIsDisplayed(exerciseFormBtn);
     }
 
     //navigating to EmployeeExit page
     public EmployeeExitPage goToEmployeeExitPage(){
-        helperMethods.scrollIntoView(elementUtils.getElement(employeeExitNavBar));
+        helperComponents.scrollIntoView(elementUtils.getElement(employeeExitNavBar));
         elementUtils.clickElementByJS(employeeExitNavBar);
         return new EmployeeExitPage(driver);    }
 

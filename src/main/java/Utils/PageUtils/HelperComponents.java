@@ -4,20 +4,23 @@ import java.io.File;
 import java.io.FileFilter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.Random;
 
+import Constants.AppConstants;
+import Utils.PropertyUtils.ReadProperty;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
-public class HelperMethods  {
+public class HelperComponents {
 
 	 WebDriver driver;
 	 ElementUtils elementUtils;
 	 private Random rand = new Random();
 
-	public HelperMethods(WebDriver driver) {
+	public HelperComponents(WebDriver driver) {
 		this.driver = driver;
 		elementUtils = new ElementUtils(driver);
 	}
@@ -63,6 +66,27 @@ public class HelperMethods  {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	//getting current browser for setting custom download path
+	public synchronized String gettingCurrentBrowser(){
+		String browserName = null;
+		if(System.getProperty("browser") == null){
+			browserName = ReadProperty.getProperty("browser");
+		} else{
+			browserName = System.getProperty("browser");
+		}
+		return browserName;
+	}
+
+	public synchronized String getFileDownloadDirectory(){
+		String browser = gettingCurrentBrowser();
+		String downloadDir =null;
+		if(Objects.nonNull(browser)){
+			downloadDir = browser.equalsIgnoreCase("chrome") ?
+					AppConstants.FILEDOWNLOADPATH_CHROME : AppConstants.FILEDOWNLOADPATH_FIREFOX;
+		}
+		return downloadDir;
 	}
 
 	public  void scrollIntoView(WebElement element) {

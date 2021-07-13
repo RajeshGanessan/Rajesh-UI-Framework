@@ -1,22 +1,22 @@
 package Pages;
 
 import Base.Base;
+import Utils.PageUtils.HelperComponents;
 import Utils.TestDataUtil.ExcelUtils;
 import Utils.PageUtils.ElementUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import Utils.PageUtils.HelperMethods;
 
 public class VestingSchedulePage extends Base {
 
     WebDriver driver;
     ElementUtils elementUtils;
-    HelperMethods helperMethods;
+    HelperComponents helperComponents;
 
     public VestingSchedulePage(WebDriver driver){
         this.driver = driver;
         elementUtils = new ElementUtils(driver);
-        helperMethods = new HelperMethods(driver);
+        helperComponents = new HelperComponents(driver);
 		getData = new ExcelUtils("VestingSchedules");
 
 	}
@@ -50,11 +50,11 @@ public class VestingSchedulePage extends Base {
 
 	//Filling vestingForm Details
 	private void fillVestingDetails(String vestingName,String vestingPeriod,String frequency,String cliffPeriod) throws Exception {
-		int randomDigit = helperMethods.getRandomNumber();
+		int randomDigit = helperComponents.getRandomNumber();
 		if (goToCreatePage()) {
 			elementUtils.doSendKeys(scheduleName, vestingName + randomDigit);
 			elementUtils.doSendKeys(vestingSchedulePeriod, vestingPeriod );
-			helperMethods.selectFromDropdown(frequency,vestingFrequency);
+			helperComponents.selectFromDropdown(frequency,vestingFrequency);
 			elementUtils.doSendKeys(cliffPeriodField, cliffPeriod);
 		} else {
 			throw new Exception("Cant able to fill the vesting details");

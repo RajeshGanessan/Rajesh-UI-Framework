@@ -3,7 +3,7 @@ package Pages;
 import Base.Base;
 import Constants.AppConstants;
 import Utils.PageUtils.ElementUtils;
-import Utils.PageUtils.HelperMethods;
+import Utils.PageUtils.HelperComponents;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -19,12 +19,12 @@ public class EmployeeHomePage extends Base {
     private WebDriver driver;
     ElementUtils elementUtils;
     private Random rand;
-    HelperMethods helperMethods;
+    HelperComponents helperComponents;
 
     public EmployeeHomePage(WebDriver driver){
         this.driver = driver;
         elementUtils = new ElementUtils(driver);
-        helperMethods = new HelperMethods(driver);
+        helperComponents = new HelperComponents(driver);
     }
 
     private final By pageHeader = By.xpath("//div[normalize-space()='ESOP Overview']");
@@ -54,17 +54,19 @@ public class EmployeeHomePage extends Base {
     }
 
     private int getVestedOptions(){
-        helperMethods.scrollIntoView(elementUtils.getElement(vestedOptionsCount));
+        helperComponents.scrollIntoView(elementUtils.getElement(vestedOptionsCount));
         return Integer.parseInt(elementUtils.doGetText(vestedOptionsCount));
     }
 
+
+
     private double getExercisePrice(){
-        helperMethods.scrollIntoView(elementUtils.getElement(vestedOptionsCount));
+        helperComponents.scrollIntoView(elementUtils.getElement(vestedOptionsCount));
         return getNumericValue(elementUtils.doGetText(exercisePrice));
     }
 
     public double getAmountToBePaidValue(){
-        helperMethods.scrollIntoView(elementUtils.getElement(amountOnExercise));
+        helperComponents.scrollIntoView(elementUtils.getElement(amountOnExercise));
         return getNumericValue(elementUtils.doGetText(amountOnExercise));
     }
 
@@ -111,7 +113,7 @@ public class EmployeeHomePage extends Base {
 
     //verifying File downloading
     public boolean verifyFileDownload(String downloadPath){
-        helperMethods.scrollIntoView(elementUtils.getElement(downloadGrantBtn));
+        helperComponents.scrollIntoView(elementUtils.getElement(downloadGrantBtn));
         elementUtils.clickElementByJS(downloadGrantBtn);
         elementUtils.waitForElementInvisibility(fetchingFile);
         elementUtils.staticWait(2);
@@ -120,7 +122,7 @@ public class EmployeeHomePage extends Base {
 
     //delete the DownloadedReportFile
     public void isFileDeleted(){
-        File dir = new File(AppConstants.FILEDOWNLOADPATH);
+        File dir = new File(helperComponents.getFileDownloadDirectory());
         File files[] = dir.listFiles();
         if(files.length==0) {
             System.out.println("No Files to delete");

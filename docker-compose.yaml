@@ -28,19 +28,21 @@ services:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
     restart: on-failure:2
-  mseautomation:
-    image: letsventure/mse-docker:latest
-    depends_on:
-      - chrome
-      - firefox
-    environment:
-      - BROWSER=chrome
-      - MODULE=testngSmoke.xml
-      - HUB_HOST=selenium-hub
-    volumes:
-      - ./remote-results:/usr/mystartupEquity/test-output
-      - ./remote-report:/usr/mystartupEquity/Build-Reports
-      - ./file-Downloads:/usr/mystartupEquity/MSE-Reports
+#  mseautomation:
+#    image: letsventure/mse-docker:latest
+#    depends_on:
+#      - chrome
+#      - firefox
+#    environment:
+#      - BROWSER=chrome
+#      - MODULE=testngSmoke.xml
+#      - HUB_HOST=selenium-hub
+#    volumes:
+#      - ./remote-results:/usr/mystartupEquity/test-output
+#      - ./remote-report:/usr/mystartupEquity/Build-Reports
+#      - ./file-Downloads:/usr/mystartupEquity/MSE-Reports
+
+
 
 
 

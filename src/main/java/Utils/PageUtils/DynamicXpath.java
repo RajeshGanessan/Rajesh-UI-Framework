@@ -8,6 +8,7 @@ public class DynamicXpath {
 		
 		String rawXapth = xpath.replaceAll("%replaceable%", data);
 		return By.xpath(rawXapth);
+
 	}
 
 	public static By get(String xpath,int data){

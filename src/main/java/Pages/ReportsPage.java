@@ -4,7 +4,8 @@ import Base.Base;
 import Constants.AppConstants;
 import Utils.PageUtils.DynamicXpath;
 import Utils.PageUtils.ElementUtils;
-import Utils.PageUtils.HelperMethods;
+import Utils.PageUtils.HelperComponents;
+import Utils.PropertyUtils.ReadProperty;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -12,19 +13,19 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class ReportsPage extends Base {
 
     private WebDriver driver;
     ElementUtils elementUtils;
-    HelperMethods helperMethods;
+    HelperComponents helperComponents;
    private DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("MMMM d, yyyy");
-
 
     public ReportsPage(WebDriver driver){
         this.driver =  driver;
         elementUtils = new ElementUtils(driver);
-        helperMethods = new HelperMethods(driver);
+        helperComponents = new HelperComponents(driver);
     }
 
     private final By pageTitle = By.xpath("//div[text()='Reports']");
@@ -43,7 +44,7 @@ public class ReportsPage extends Base {
 
     //Selecting Report Type
     public void selectReportType(String reportName){
-        helperMethods.selectFromDropdown(reportName,reportType);
+        helperComponents.selectFromDropdown(reportName,reportType);
     }
 
     //getting PageHeader
@@ -53,8 +54,8 @@ public class ReportsPage extends Base {
 
     //Selecting report with Transaction Type
     public void selectReportType(String reportName,String TransactionType){
-        helperMethods.selectFromDropdown(reportName,reportType);
-        helperMethods.selectFromDropdown(TransactionType,transactionType);
+        helperComponents.selectFromDropdown(reportName,reportType);
+        helperComponents.selectFromDropdown(TransactionType,transactionType);
     }
 
     //select FromDate
@@ -78,16 +79,16 @@ public class ReportsPage extends Base {
     }
 
     //verifying File downloading
-    public boolean verifyFileDownload(String downloadPath){
+    public boolean verifyFileDownload(){
             elementUtils.doClick(downloadReportBtn);
             elementUtils.waitForElementInvisibility(fetchingFile);
              elementUtils.staticWait(2);
-            return isFileDownloadedExt(downloadPath,".xlsx");
+            return isFileDownloadedExt(".xlsx");
     }
 
     //delete the DownloadedReportFile
     public boolean isFileDeleted(){
-        File dir = new File(AppConstants.FILEDOWNLOADPATH);
+        File dir = new File(helperComponents.getFileDownloadDirectory());
         File files[] = dir.listFiles();
         if(files.length==0) {
             System.out.println("No Files to delete");
@@ -98,10 +99,10 @@ public class ReportsPage extends Base {
         return false;
     }
 
-    //Checking whether FILE is present in the downloaded Directory
-    private boolean isFileDownloadedExt (String dirPath,String ext){
 
-        File dir = new File(dirPath);
+    //Checking whether FILE is present in the downloaded Directory
+    private synchronized boolean isFileDownloadedExt (String ext){
+        File dir = new File(helperComponents.getFileDownloadDirectory());
         File[] files = dir.listFiles();
        return Arrays.stream(files).anyMatch(s -> s.getName().contains(ext));
     }

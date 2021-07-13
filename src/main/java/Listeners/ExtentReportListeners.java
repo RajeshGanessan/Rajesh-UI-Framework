@@ -1,24 +1,16 @@
 package Listeners;
 
 import Base.Base;
-import Utils.PageUtils.HelperMethods;
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
+
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,7 +26,7 @@ public class ExtentReportListeners  extends Base implements ITestListener {
     @Override
     public synchronized void onFinish(ITestContext context) {
         System.out.println("Test Suite has completed");
-       ExtentReporter.flushReports();
+        ExtentReporter.flushReports();
     }
     @Override
     public synchronized void onTestStart(ITestResult result) {

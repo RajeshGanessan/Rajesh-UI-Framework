@@ -2,7 +2,7 @@ package Pages;
 
 import Base.Base;
 import Utils.PageUtils.ElementUtils;
-import Utils.PageUtils.HelperMethods;
+import Utils.PageUtils.HelperComponents;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -11,12 +11,12 @@ public class DashboardPage extends Base {
 
 	public WebDriver driver;
 	ElementUtils elementUtils;
-	HelperMethods helperMethods;
+	HelperComponents helperComponents;
 
 	public DashboardPage(WebDriver driver) {
 		this.driver = driver;
 		elementUtils = new ElementUtils(driver);
-		helperMethods = new HelperMethods(driver);
+		helperComponents = new HelperComponents(driver);
 	}
 
 
@@ -32,7 +32,7 @@ public class DashboardPage extends Base {
 
 	//functionMethods
 	public String getFooterText() throws InterruptedException {
-		helperMethods.scrollIntoView(elementUtils.getElement(footerText));
+		helperComponents.scrollIntoView(elementUtils.getElement(footerText));
 		return elementUtils.doGetText(footerText);
 	}
 

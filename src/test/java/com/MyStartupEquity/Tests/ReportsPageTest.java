@@ -35,7 +35,7 @@ public class ReportsPageTest extends BaseTest {
         reportsPage.selectReportType("Grant Report");
         reportsPage.selectStartDate("January","1");
         reportsPage.selectEndDate();
-         boolean isFileDownloaded = reportsPage.verifyFileDownload(AppConstants.FILEDOWNLOADPATH);
+         boolean isFileDownloaded = reportsPage.verifyFileDownload();
          Assert.assertTrue(isFileDownloaded);
     }
 
@@ -44,12 +44,12 @@ public class ReportsPageTest extends BaseTest {
         reportsPage.selectReportType("Transactions Report",transactionType);
         reportsPage.selectStartDate("January","1");
         reportsPage.selectEndDate();
-        boolean isFileDownloaded = reportsPage.verifyFileDownload(AppConstants.FILEDOWNLOADPATH);
+        boolean isFileDownloaded = reportsPage.verifyFileDownload();
         Assert.assertTrue(isFileDownloaded);
     }
 
-//    @AfterMethod(description = "Deleting the Downloaded Reports")
-//    public void deleteReportFile(){
-//        reportsPage.isFileDeleted();
-//    }
+    @AfterMethod(description = "Deleting the Downloaded Reports")
+    public void deleteReportFile(){
+        reportsPage.isFileDeleted();
+    }
 }

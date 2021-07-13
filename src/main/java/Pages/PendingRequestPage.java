@@ -2,21 +2,22 @@ package Pages;
 
 import Base.Base;
 import Utils.PageUtils.ElementUtils;
-import Utils.PageUtils.HelperMethods;
+import Utils.PageUtils.HelperComponents;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import java.util.Set;
 
 public class PendingRequestPage extends Base {
 
     private  WebDriver driver;
     ElementUtils elementUtils;
-    HelperMethods helperMethods;
+    HelperComponents helperComponents;
 
 	public PendingRequestPage(WebDriver driver) {
 	    this.driver = driver;
 	    elementUtils = new ElementUtils(driver);
-	    helperMethods = new HelperMethods(driver);
+	    helperComponents = new HelperComponents(driver);
 	}
 
 	private final By pageTitle = By.xpath("//div[@class='page_title']");

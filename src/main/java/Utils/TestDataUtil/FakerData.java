@@ -20,7 +20,7 @@ public final class FakerData {
 
 		faker = new Faker();
 		joiner = new StringJoiner(" ");
-		joiner.add(faker.name().firstName()).add(faker.name().lastName());
+		joiner.add(faker.name().firstName().replace(''/'')).add(faker.name().lastName());
 		return joiner.toString();
 	}
 
@@ -29,11 +29,11 @@ public final class FakerData {
 		faker = new Faker(new Locale("en-IND"));
 		PhoneNumber number = faker.phoneNumber();
 		String phoneNumber = number.phoneNumber().replace("+91","").replace("-","");
-		if(phoneNumber.startsWith("00"))  getPhoneNumber();
+		if(phoneNumber.startsWith("00")) phoneNumber = phoneNumber.replace("00","99");
 		return phoneNumber;
 	}
 
-	// to generate random ID
+	// to generate random IDt stat
 	public String generateId() {
 
 		 Random rand = new Random();

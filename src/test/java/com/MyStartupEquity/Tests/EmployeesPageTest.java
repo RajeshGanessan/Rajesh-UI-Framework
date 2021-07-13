@@ -39,20 +39,15 @@ public class EmployeesPageTest extends BaseTest {
 		employeesPage.setEmployeeName(faker.getEmpName())
 				     .setEmployeeId(faker.generateId())
 				     .setEmpEmail(faker.getEmailAddress())
-		             .setEmployeePhoneNumber(faker.getPhoneNumber());
-		employeesPage.setEmployeeAddress(faker.getAddress());
-		employeesPage.selectNationality("India");
-		employeesPage.selectJoiningDate();
-		employeesPage.setPanNumber("ASDFG3456K");
-		employeesPage.setEmployeeDesignation("Product Engineer");
+		             .setEmployeePhoneNumber(faker.getPhoneNumber())
+		             .setEmployeeAddress(faker.getAddress())
+					 .selectNationality("India")
+		             .selectJoiningDate()
+				     .setPanNumber("ASDFG3456K")
+					 .setEmployeeDesignation("Product Engineer");
 		Assert.assertTrue(employeesPage.checkSuccessMessage(),"Adding Employee Failed");
 	}
 
-// Sear
-//	@Test(description = "Searching for an Employee",dependsOnMethods = "addNewEmployee")
-//	public void SearchEmployee() {
-//		boolean employeeSearch = employeesPage.searchEmployee("suhail");
-//		Assert.assertTrue(employeeSearch,"Employee Search Failed! ");
-//	}
+
 
 }

@@ -6,7 +6,8 @@ public class AppConstants {
 
     public static final String HUB_HOST = System.getProperty("HUB_HOST");
 
-    public static final String FILEDOWNLOADPATH = System.getProperty("user.dir") + File.separator + "MSE-Reports";
+    public static final String FILEDOWNLOADPATH_CHROME = System.getProperty("user.dir") + File.separator + "MSE-Reports" +File.separator + "Chrome";
+    public static final String FILEDOWNLOADPATH_FIREFOX = System.getProperty("user.dir") + File.separator + "MSE-Reports" + File.separator + "Firefox";
 
     public static final String EXCELFILE_PATH = System.getProperty("user.dir") + "/src/main/java/TestData/ExcelData.xlsx";
 

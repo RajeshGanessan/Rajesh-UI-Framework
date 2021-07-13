@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 
 public class Base {
 
-         OptionsManager optionsManager;
+        OptionsManager optionsManager;
         public ExcelUtils getData;
 
         public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
@@ -46,7 +46,6 @@ public class Base {
             } else{
                 browserName = System.getProperty("browser");
             }
-
             System.out.println("Running on ---> " + browserName + " browser");
 
             optionsManager = new OptionsManager();
@@ -87,14 +86,14 @@ public class Base {
 
         //Setting Remote Webdriver
     private void initRemoteWebdriver(String browserName) {
-        String remoteURL = "http://"+ System.getProperty("HUB_HOST")+":4444/wd/hub";
         if(browserName.equalsIgnoreCase("chrome")){
                 DesiredCapabilities capChrome = DesiredCapabilities.chrome();
-                capChrome.setCapability("browserName","chrome");
-                 capChrome.setCapability("enableVNC",true);
+                capChrome.setBrowserName(BrowserType.CHROME);
                 capChrome.setCapability(ChromeOptions.CAPABILITY,optionsManager.getChromeOptions());
                 try{
                     if(System.getProperty("HUB_HOST")!=null){
+                        String remoteURL = "http://"+ System.getProperty("HUB_HOST")+":4444/wd/hub";
+                        System.out.println(">>>>>>>> " + remoteURL + "<<<<<<<<<");
                         tlDriver.set(new RemoteWebDriver(new URL(remoteURL),capChrome));
                     } else {
                         tlDriver.set(new RemoteWebDriver(new URL(ReadProperty.getProperty("hubhost")),capChrome));
@@ -110,6 +109,8 @@ public class Base {
                 capFirefox.setCapability(FirefoxOptions.FIREFOX_OPTIONS,optionsManager.getFirefoxOptions());
                 try{
                     if(System.getProperty("HUB_HOST")!=null){
+                        String remoteURL = "http://"+ System.getProperty("HUB_HOST")+":4444/wd/hub";
+                        System.out.println(">>>>>>>> " + remoteURL + "<<<<<<<<<");
                         tlDriver.set(new RemoteWebDriver(new URL(remoteURL),capFirefox));
                     } else {
                         tlDriver.set(new RemoteWebDriver(new URL(ReadProperty.getProperty("hubhost")), capFirefox));
@@ -119,6 +120,7 @@ public class Base {
                 }
             }
     }
+
 
 
 

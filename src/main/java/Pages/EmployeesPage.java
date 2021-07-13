@@ -1,7 +1,7 @@
 package Pages;
 
 import Utils.PageUtils.ElementUtils;
-import Utils.PageUtils.HelperMethods;
+import Utils.PageUtils.HelperComponents;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -13,12 +13,12 @@ public class EmployeesPage extends Base{
 
 	WebDriver driver;
 	ElementUtils elementUtils;
-	HelperMethods helperMethods;
+	HelperComponents helperComponents;
 
 	public EmployeesPage(WebDriver driver){
 		this.driver = driver;
 		elementUtils = new ElementUtils(driver);
-		helperMethods = new HelperMethods(driver);
+		helperComponents = new HelperComponents(driver);
 	}
 
 
@@ -36,8 +36,6 @@ public class EmployeesPage extends Base{
 	private final By calenderTitle = By.xpath("//select[@class='flatpickr-monthDropdown-months']");
 	private final By joiningDate = By.xpath("//input[@placeholder='Select date']");
 	private final By employeeDesignation = By.xpath("//input[@name='new_employee_designation']");
-	private final By employeeDepartment = By.xpath("//input[@name='new_employee_department']");
-	private final By employeeSubsidiary = By.xpath("//input[@name='new_employee_subsidiary']");
 	private final By grantOptionsNavBar = By.xpath("//a[contains(text(),'Grant Options')]");
 	private final By employeePanNo = By.xpath("//input[@name='new_employee_pan']");
 	private final By createEmpBtn = By.xpath("//button[contains(text(),'Add Employee')]");
@@ -51,14 +49,15 @@ public class EmployeesPage extends Base{
 	}
 
 	// Selecting date from calender
-	public void selectJoiningDate() {
-		helperMethods.selectDateFromCalender(arrowDown,joiningDate,calenderTitle);
+	public EmployeesPage selectJoiningDate() {
+		helperComponents.selectDateFromCalender(arrowDown,joiningDate,calenderTitle);
+		return this;
 	}
 
 	// checking successMessage
 	public boolean checkSuccessMessage() {
 		try{
-			helperMethods.scrollIntoView(elementUtils.getElement(createEmpBtn));
+			helperComponents.scrollIntoView(elementUtils.getElement(createEmpBtn));
 			elementUtils.doClick(createEmpBtn);
 			elementUtils.waitForElementVisibility(SuccessMessage);
 		} catch (Exception e){
@@ -89,26 +88,31 @@ public class EmployeesPage extends Base{
 		return this;
 	}
 
-	public void setEmployeePhoneNumber(String contactNumberToEnter) {
+	public EmployeesPage setEmployeePhoneNumber(String contactNumberToEnter) {
 		elementUtils.doSendKeys(employeePhoneNumber,contactNumberToEnter);
-		helperMethods.scrollIntoView(elementUtils.getElement(employeeDesignation));
+		helperComponents.scrollIntoView(elementUtils.getElement(employeeDesignation));
+		return this;
 	}
 
-	public void setEmployeeAddress(String addressToEnter){
+	public EmployeesPage setEmployeeAddress(String addressToEnter){
 		elementUtils.doSendKeys(employeeAddress,addressToEnter);
+		return this;
 	}
 
-	public void selectNationality(String nationalityToSelect){
+	public EmployeesPage selectNationality(String nationalityToSelect){
 		elementUtils.doSendKeys(empNationality,nationalityToSelect);
         driver.findElement(DynamicXpath.get(nationalityXpath, nationalityToSelect)).click();
+        return this;
 	}
 
-	public void setPanNumber(String panNoToEnter){
+	public EmployeesPage setPanNumber(String panNoToEnter){
 		elementUtils.doSendKeys(employeePanNo,panNoToEnter);
+		return this;
 	}
 
-	public void setEmployeeDesignation(String designationToEnter){
+	public EmployeesPage setEmployeeDesignation(String designationToEnter){
 		elementUtils.doSendKeys(employeeDesignation,designationToEnter);
+		return this;
 	}
 
 	// Navigating to GrantOptionsPage
