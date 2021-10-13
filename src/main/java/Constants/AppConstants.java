@@ -11,7 +11,7 @@ public class AppConstants {
 
     public static final String EXCELFILE_PATH = System.getProperty("user.dir") + "/src/main/java/TestData/ExcelData.xlsx";
 
-    public static final String LOGINPAGE_TITLE = "Login | MyStartupEquity - Cap Table & ESOP Management for Startups";
+    public static final String LOGINPAGE_TITLE = "s";
 
     public static final String DASHBOARD_PAGE_HEADER = "ESOP Overview";
 
@@ -27,7 +27,7 @@ public class AppConstants {
 
     public static final String EXERCISEOPTIONS_HEADER = "Exercise Options";
 
-	public static final String DASHBOARD_PAGE_FOOTER = "© 2021 LetsVenture Technologies Pvt Ltd, All Rights Reserved.";
+	public static final String DASHBOARD_PAGE_FOOTER = ".";
 
 	public static final String APP_PASS = "evighxbsxmecjeiw";
 
