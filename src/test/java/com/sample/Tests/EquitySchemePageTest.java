@@ -1,4 +1,4 @@
-package com.MyStartupEquity.Tests;
+package com.sample.Tests;
 
 import java.io.IOException;
 

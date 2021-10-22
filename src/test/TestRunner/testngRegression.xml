@@ -10,11 +10,11 @@
     <test name="Chrome test">
         <parameter name="Browser" value="chrome" />
         <classes>
-            <class name="com.MyStartupEquity.Tests.LoginTest" />
-            <class name="com.MyStartupEquity.Tests.grantOptionTest"/>
-            <class name="com.MyStartupEquity.Tests.pendingRequestTest"/>
+            <class name="LoginTest" />
+            <class name="grantOptionTest"/>
+            <class name="pendingRequestTest"/>
              <class name="com.MyStartupEquity.Tests.VestingTablePageTest"/>
-             <class name="com.MyStartupEquity.Tests.ReportsPageTest"/>
+             <class name="ReportsPageTest"/>
         </classes>
     </test>
 

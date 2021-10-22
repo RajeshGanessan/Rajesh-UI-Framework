@@ -10,8 +10,8 @@
     <test name="Chrome test">
         <parameter name="Browser" value="chrome"/>
         <classes>
-<!--            <class name="com.MyStartupEquity.Tests.LoginTest" />-->
-            <class name="com.MyStartupEquity.Tests.EmployeeHomePageTest"/>
+<!--            <class name="LoginTest" />-->
+            <class name="EmployeeHomePageTest"/>
 
         </classes>
     </test>
