@@ -31,7 +31,7 @@ public class grantOptionTest extends BaseTest {
 		Assert.assertEquals(AppConstants.GRANT_OPTIONS_HEADER,grantOptionsHeader);
 	}
 
-	@Test(priority = 2,description ="Creating Existing Grant")
+	@Test(priority = 2,description ="Creating sample 1")
 	public void createExistingGrant() {
 		grantOptionsPage.selectEmployeeFromList("success")
 		.selectEquityScheme("ESOP 2021")
@@ -45,7 +45,7 @@ public class grantOptionTest extends BaseTest {
 		Assert.assertTrue("Existing Grant Creation Failed", grantOptionsPage.checkSuccessMessage());
 	}
 
-	@Test(priority = 3,description="Creating Fresh Grant",invocationCount = 2)
+	@Test(priority = 3,description="Creating sample 2",invocationCount = 2)
 	public void createFreshGrant() {
 		grantOptionsPage.clearAndRefresh()
 		.selectEmployeeFromList("success")

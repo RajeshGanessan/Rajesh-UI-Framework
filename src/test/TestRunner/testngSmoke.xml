@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="MystartUpEquity Test automation regression suite" verbose="3"
+<suite name="Sample Test automation regression suite" verbose="3"
        thread-count="1" parallel="classes">
 
     <listeners>
         <listener class-name="Listeners.ExtentReportListeners"> </listener>
     </listeners>
-    <test name="Chrome - Regression Tests = MyStartupEquity">
+    <test name="Chrome - Regression Tests = sample">
         <parameter name="Browser" value="chrome" />
         <classes>
-<!--            <class name="LoginTest" />-->
-<!--            <class name="DashboardPageTest"/>-->
-<!--             <class name="grantOptionTest"/>-->
-<!--            <class name="pendingRequestTest"/>-->
-<!--            <class name="EmployeeHomePageTest"/>-->
-<!--            <class name="AllGrantsPageTest"/>-->
-<!--            <class name="ReportsPageTest"/>-->
-             <class name="ExerciseOptionPageTest"/>
-<!--            <class name="EmployeeExitPageTest"/>-->
+            <class name="com.sample.Tests.LoginTest" />
+            <class name="com.sample.Tests.DashboardPageTest"/>
+             <class name="com.sample.Tests.EquitySchemePageTest"/>
+            <class name="com.sample.Tests.VestingSchedulePageTest"/>
+            <class name="com.sample.Tests.grantOptionTest"/>
+            <class name="com.sample.Tests.EmployeesPageTest"/>
+            <class name="com.sample.Tests.EmployeeHomePageTest"/>
+             <class name="com.sample.Tests.ReportsPageTest"/>
+           <class name="com.sample.Tests.EmployeeExitPageTest"/>
         </classes>
     </test>
 
-    <test name="Firefox - All Tests = MyStartupEquity" enabled="false" >
+    <test name="Firefox - All Tests = sample" enabled="false" >
         <parameter name="Browser" value="firefox" />
         <classes>
 <!--                        <class name="LoginTest" />-->

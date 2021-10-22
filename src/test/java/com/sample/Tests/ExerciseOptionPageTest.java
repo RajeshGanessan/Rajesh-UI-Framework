@@ -22,13 +22,13 @@ public class ExerciseOptionPageTest extends BaseTest {
         exerciseOptionsPage = reportsPage.goToAllGrantsPage();
     }
 
-    @Test(priority = 1,description = "All grants Page Header")
+    @Test(priority = 1,description = "All sample Header")
     public void verifyAllGrantsPageHeader(){
         String allGrants = exerciseOptionsPage.getPageTitle();
         Assert.assertEquals(allGrants, AppConstants.ALL_GRANTS_HEADER);
     }
 
-    @Test(priority = 2,description = " Getting employees")
+    @Test(priority = 2,description = " get sample ")
     public void NavigatingToExerciseOptions(){
 //        boolean isNavigatedToEmployeeDetails = exerciseOptionsPage.goToEmployeeDetails();
 //        Assert.assertTrue(isNavigatedToEmployeeDetails);
@@ -40,7 +40,7 @@ public class ExerciseOptionPageTest extends BaseTest {
        Assert.assertTrue(isNavigatedToExerciseOptions);
     }
 
-    @Test(priority = 3, description = "Filling exercise Details")
+    @Test(priority = 3, description = "Sample Details")
     public void verifyExerciseOptions(){
         boolean isExerciseDetailsUpdated = exerciseOptionsPage
                 .enterOptionsToBeExercised()

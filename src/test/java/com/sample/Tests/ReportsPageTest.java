@@ -24,13 +24,13 @@ public class ReportsPageTest extends BaseTest {
         reportsPage = allGrantsPage.goToReportsPage();
     }
 
-    @Test(priority = 1, description = "verifying ReportsPage header")
+    @Test(priority = 1, description = "verifying sample header")
     public void verifyReportsPageHeader(){
       String reportPageHeader = reportsPage.getReportPageHeader();
       Assert.assertEquals(reportPageHeader,AppConstants.REPORTS_PAGE_HEADER,"Page header verification failed");
     }
 
-    @Test(priority = 2,description = "verify Grant-Report")
+    @Test(priority = 2,description = "verify sample-Report")
     public void verifyGrantReport(){
         reportsPage.selectReportType("Grant Report")
         .selectStartDate("January","1")
@@ -39,7 +39,7 @@ public class ReportsPageTest extends BaseTest {
          Assert.assertTrue(isFileDownloaded);
     }
 
-    @Test(priority = 3,description = "verify Transaction",dataProvider = "TransactionTypes",dataProviderClass = DataProviderManager.class)
+    @Test(priority = 3,description = "verify sample ",dataProvider = "TransactionTypes",dataProviderClass = DataProviderManager.class)
     public void verifyTransactionReport(String transactionType){
         reportsPage.selectReportType("Transactions Report",transactionType)
         .selectStartDate("January","1")

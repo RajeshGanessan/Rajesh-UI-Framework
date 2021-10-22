@@ -25,13 +25,13 @@ public class VestingSchedulePageTest extends BaseTest {
 		vestingSchedulePage = equitySchemePage.goToVestingSchedulePage();
 	}
 
-	@Test(priority = 1, description = "Checking Vesting schedule header")
+	@Test(priority = 1, description = "Checking sample header")
 	public void checkVestingScheduleHeader() {
 		String VHeader = vestingSchedulePage.getVestingSchedulePageHeader();
 		Assert.assertEquals(VHeader, AppConstants.VESTING_SCHEDULE_HEADER);
 	}
 
-	@Test(priority = 2,description = "Creating new Vesting Schedule")
+	@Test(priority = 2,description = "Creating sampleSchedule")
 	public void createNewVestingSchedule() {
 		boolean isVestingScheduleAdded = vestingSchedulePage.createVestingSchedule(getData.getCellData(1,0),
                                         getData.getCellData(1,1),getData.getCellData(1,2),
@@ -39,7 +39,7 @@ public class VestingSchedulePageTest extends BaseTest {
 		Assert.assertTrue(isVestingScheduleAdded);
 	}
 
-	@Test(priority = 3, description = "Creating Vesting schedule with Custom vesting Options")
+	@Test(priority = 3, description = "Creating sample  Options")
 	public void CreateVestingScheduleWithCustomVesting() {
         boolean isCustomVestingAdded = vestingSchedulePage.createVestingSchedule("vcustomm","36",
                                 "Annually","12","20","30","50");

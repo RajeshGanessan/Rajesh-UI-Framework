@@ -27,13 +27,13 @@ public class EquitySchemePageTest extends BaseTest {
 	}
 
 
-	@Test(priority = 1)
+	@Test(priority = 1, description ="getting sample header")
 	public void verifySchemePageHeader() {
 	    String schemePageHeader = equitySchemePage.getEquityPageHeader();
 		Assert.assertEquals(schemePageHeader, AppConstants.ESOP_HEADER);
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, description = " getting sample scheme")
 	public void CreateEquityScheme() throws IOException {
 
 	    equitySchemePage.selectSchemeType(EquitySchemePage.SchemeTypes.ESOP);
@@ -42,7 +42,7 @@ public class EquitySchemePageTest extends BaseTest {
 	   Assert.assertTrue(isSchemeCreated,"Scheme Creation Failed!!!");
 	}
 
-	@Test(priority=3,enabled = false)
+	@Test(priority=3,enabled = false, description="getting sample verification")
 	public void verifyAddedSchemeDetails() {
 		boolean isSchemeVerified  = equitySchemePage.checkExpandedView();
 		Assert.assertTrue(isSchemeVerified,"Added schemeDetails verification failed!!");

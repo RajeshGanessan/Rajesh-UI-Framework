@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="MyStartupEquity AdminLogin suite">
+<suite name="Sample AdminLogin suite">
 
 	<listeners>
-		<listener class-name="Listeners.ExtentListeners">
+		<listener class-name="Listeners.ExtentReportListeners">
 		</listener>
 	</listeners>
 
@@ -11,7 +11,7 @@
 		<parameter name="browser" value="chrome">
 		</parameter>
 		<classes>
-			<class name="com.MyStartupEquity.Tests.loginTest" />
+			<class name="com.sample.Tests.LoginTest" />
 		</classes>
 	</test>
 

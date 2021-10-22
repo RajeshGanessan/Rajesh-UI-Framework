@@ -22,13 +22,13 @@ public class pendingRequestTest extends BaseTest {
 		pendingRequestPage = grantOptionPage.goToPendingRequestPage();
 	}
 //
-	@Test(priority=1,description="Checking Pending Request Page header")
+	@Test(priority=1,description="Checking sample header")
 	public void checkPendingRequestHeader() {
 		String pendingRequestTitle = pendingRequestPage.getPageTitle();
 		Assert.assertEquals(pendingRequestTitle, AppConstants.PENDING_REQUEST_HEADER);
 	}
 
-	@Test(priority = 2,description = "Approving GrantLetter with SignEasy")
+	@Test(priority = 2,description = "Approving sample SignEasy")
 	public void SigningGrantLetter() {
 		pendingRequestPage.navigateToSignEasyPage();
 		boolean isSignatureDone = pendingRequestPage.initiateSignature();
