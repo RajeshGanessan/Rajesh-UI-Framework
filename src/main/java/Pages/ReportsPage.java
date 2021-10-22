@@ -43,32 +43,37 @@ public class ReportsPage extends Base {
     String dateXpath = "//span[@aria-label='%replaceable%']";
 
     //Selecting Report Type
-    public void selectReportType(String reportName){
+    public ReportsPage selectReportType(String reportName){
         helperComponents.selectFromDropdown(reportName,reportType);
+        return this;
     }
 
     //getting PageHeader
     public String getReportPageHeader(){
         return elementUtils.getPageHeader(pageTitle);
+
     }
 
     //Selecting report with Transaction Type
-    public void selectReportType(String reportName,String TransactionType){
+    public ReportsPage selectReportType(String reportName,String TransactionType){
         helperComponents.selectFromDropdown(reportName,reportType);
         helperComponents.selectFromDropdown(TransactionType,transactionType);
+        return this;
     }
 
     //select FromDate
-    public void selectStartDate(String month,String day){
+    public ReportsPage selectStartDate(String month,String day){
         elementUtils.doClick(fromDate);
         selectMonthAndDay(month,day);
+        return this;
     }
 
-    public void selectEndDate(){
+    public ReportsPage selectEndDate(){
         String dateToSelect =  formatter.format(LocalDate.now());
         elementUtils.doClick(endDate);
         if(elementUtils.doIsDisplayed(calenderTitle))
             driver.findElement(DynamicXpath.get(dateXpath,dateToSelect)).click();
+        return this;
     }
 
     //Selecting Month and Day

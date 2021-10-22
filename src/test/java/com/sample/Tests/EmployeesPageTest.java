@@ -26,7 +26,7 @@ public class EmployeesPageTest extends BaseTest {
 
 	}
 
-	@Test(priority = 1, description = "Checking Employees page header")
+	@Test(priority = 1, description = "Checking sample page header")
 	public void CheckingEmployeeBookHeader() {
 
 		String EmpPageHeader = employeesPage.getEmployeesPageHeader();

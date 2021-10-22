@@ -33,29 +33,29 @@ public class grantOptionTest extends BaseTest {
 
 	@Test(priority = 2,description ="Creating Existing Grant")
 	public void createExistingGrant() {
-		grantOptionsPage.selectEmployeeFromList("success");
-		grantOptionsPage.selectEquityScheme("ESOP 2021");
-		grantOptionsPage.setSelectVestingField("Vesting annual");
-		grantOptionsPage.selectTypeOfGrant(GrantOptionPage.GrantType.EXISTINGGRANT);
-		grantOptionsPage.uploadGrantLetter();
-		grantOptionsPage.selectGrantDate("Existing");
-		grantOptionsPage.enterOptionsGranted();
-		grantOptionsPage.enterExercisePrice();
-		grantOptionsPage.confirmGrant();
+		grantOptionsPage.selectEmployeeFromList("success")
+		.selectEquityScheme("ESOP 2021")
+		.setSelectVestingField("Vesting annual")
+		.selectTypeOfGrant(GrantOptionPage.GrantType.EXISTINGGRANT)
+		.uploadGrantLetter()
+		.selectGrantDate("Existing")
+		.enterOptionsGranted()
+		.enterExercisePrice()
+		.confirmGrant();
 		Assert.assertTrue("Existing Grant Creation Failed", grantOptionsPage.checkSuccessMessage());
 	}
 
 	@Test(priority = 3,description="Creating Fresh Grant",invocationCount = 2)
 	public void createFreshGrant() {
-		grantOptionsPage.clearAndRefresh();
-		grantOptionsPage.selectEmployeeFromList("success");
-		grantOptionsPage.selectEquityScheme("ESOP 2021");
-		grantOptionsPage.setSelectVestingField("Vesting annual");
-		grantOptionsPage.selectTypeOfGrant(GrantOptionPage.GrantType.FRESHGRANT);
-		grantOptionsPage.selectGrantDate("Fresh");
-		grantOptionsPage.enterOptionsGranted();
-		grantOptionsPage.enterExercisePrice();
-		grantOptionsPage.confirmGrant();
+		grantOptionsPage.clearAndRefresh()
+		.selectEmployeeFromList("success")
+		.selectEquityScheme("ESOP 2021")
+		.setSelectVestingField("Vesting annual")
+		.selectTypeOfGrant(GrantOptionPage.GrantType.FRESHGRANT)
+		.selectGrantDate("Fresh")
+		.enterOptionsGranted()
+		.enterExercisePrice()
+		.confirmGrant();
 		Assert.assertTrue("Fresh Grant Creation Failed", grantOptionsPage.checkSuccessMessage());
 	}
 }

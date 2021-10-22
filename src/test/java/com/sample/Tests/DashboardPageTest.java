@@ -34,6 +34,6 @@ public class DashboardPageTest extends BaseTest {
 
         String footerText = dashboardPage.getFooterText();
         Assert.assertEquals(footerText, AppConstants.DASHBOARD_PAGE_FOOTER);
-        System.out.println("Dashboard sfooter verified");
+        System.out.println("Dashboard footer verified");
     }
 }

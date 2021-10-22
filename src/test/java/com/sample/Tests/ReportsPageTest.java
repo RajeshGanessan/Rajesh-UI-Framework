@@ -32,18 +32,18 @@ public class ReportsPageTest extends BaseTest {
 
     @Test(priority = 2,description = "verify Grant-Report")
     public void verifyGrantReport(){
-        reportsPage.selectReportType("Grant Report");
-        reportsPage.selectStartDate("January","1");
-        reportsPage.selectEndDate();
+        reportsPage.selectReportType("Grant Report")
+        .selectStartDate("January","1")
+        .selectEndDate();
          boolean isFileDownloaded = reportsPage.verifyFileDownload();
          Assert.assertTrue(isFileDownloaded);
     }
 
     @Test(priority = 3,description = "verify Transaction",dataProvider = "TransactionTypes",dataProviderClass = DataProviderManager.class)
     public void verifyTransactionReport(String transactionType){
-        reportsPage.selectReportType("Transactions Report",transactionType);
-        reportsPage.selectStartDate("January","1");
-        reportsPage.selectEndDate();
+        reportsPage.selectReportType("Transactions Report",transactionType)
+        .selectStartDate("January","1")
+        .selectEndDate();
         boolean isFileDownloaded = reportsPage.verifyFileDownload();
         Assert.assertTrue(isFileDownloaded);
     }

@@ -20,13 +20,13 @@ public class EmployeeHomePageTest extends BaseTest {
        employeeHomePage =  loginPage.doLoginToEmployeeHomePage(ReadProperty.getProperty(ConfigProperties.EMPEMAIL),ReadProperty.getProperty(ConfigProperties.PASSWORD));
     }
 
-    @Test(priority = 1,description = "Checking employee dashboard header")
+    @Test(priority = 1,description = "Checking sample dashboard header")
     public void verifyEmpDashboardHeader(){
         String empDashboardPageHeader = employeeHomePage.getHomePageHeader();
         Assert.assertEquals(empDashboardPageHeader, AppConstants.DASHBOARD_PAGE_HEADER);
     }
 
-    @Test(priority=2,description = "Calculate AmountToBePaid for Exercise")
+    @Test(priority=2,description = "Calculate sample for Exercise")
     public void verifyAmountToBePaid(){
         String grantOptionsHeader = employeeHomePage.getGrantOptionsHeader();
         Assert.assertEquals(grantOptionsHeader,AppConstants.GRANTED_OPTIONS_HEADER);
@@ -35,7 +35,7 @@ public class EmployeeHomePageTest extends BaseTest {
         Assert.assertEquals(actualAmountPaid,expectedAmountPaid," Actual amount paid is not equal to expected");
     }
 
-    @Test(priority = 4,description = "Verifying submit exercise options")
+    @Test(priority = 4,description = "Verifying sample exercise options")
     public void verifySubmitExerciseOptions(){
         boolean isExerciseSubmitted = employeeHomePage.goToExercisePopup()
                 .enterOptionsToExercise()

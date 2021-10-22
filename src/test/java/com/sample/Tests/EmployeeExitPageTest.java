@@ -23,7 +23,7 @@ public class EmployeeExitPageTest extends BaseTest {
         employeeExitPage = exerciseOptionsPage.goToEmployeeExitPage();
     }
 
-    @Test(priority = 2,description = "Starting Exit Progress",dataProvider = "ExitProcessTypes",dataProviderClass = DataProviderManager.class)
+    @Test(priority = 2,description = "Starting sample Progress",dataProvider = "ExitProcessTypes",dataProviderClass = DataProviderManager.class)
     public void verifyStartingExitProcess(String ExitReason){
         employeeExitPage.selectEmployeeFromList("success");
         employeeExitPage.selectExitReasonFromList(ExitReason);

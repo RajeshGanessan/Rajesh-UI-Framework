@@ -63,20 +63,23 @@ public class GrantOptionPage extends Base {
 		FRESHGRANT
 	}
 
-	public void selectEmployeeFromList(String empToSelect){
-		if(elementUtils.doIsDisplayed(grantOptionsHeader))
-		helperComponents.selectRandomValueFromList(empToSelect,selectEmployee);
-	    }
+	public GrantOptionPage selectEmployeeFromList(String empToSelect) {
+		if (elementUtils.doIsDisplayed(grantOptionsHeader))
+			helperComponents.selectRandomValueFromList(empToSelect, selectEmployee);
+		return this;
+	}
 
-    public void selectEquityScheme(String schemeToSelect){
+    public GrantOptionPage selectEquityScheme(String schemeToSelect){
 		helperComponents.selectFromDropdown(schemeToSelect,selectScheme);
+		return this;
 	}
 
-    public void setSelectVestingField(String vestingToSelect){
+    public GrantOptionPage setSelectVestingField(String vestingToSelect){
 		helperComponents.selectFromDropdown(vestingToSelect,selectVestingField);
+		return this;
 	}
 
-    public void selectTypeOfGrant(GrantType typeOfGrant){
+    public GrantOptionPage selectTypeOfGrant(GrantType typeOfGrant){
 			if (typeOfGrant.equals(GrantType.FRESHGRANT)) {
 				helperComponents.selectFromDropdown("Fresh Grant",
 						selectTypeOfGrantField);
@@ -84,10 +87,12 @@ public class GrantOptionPage extends Base {
 				helperComponents.selectFromDropdown("Grant letter has been signed physically by the Employee",
 						selectTypeOfGrantField);
 			} else throw new InvalidArgumentException("The given Grant type is not correct, Check once");
+			return this;
 		}
 
 
-	public void uploadGrantLetter(){
+
+	public GrantOptionPage uploadGrantLetter(){
 		if(elementUtils.doIsDisplayed(grantLetterLabel)) {
 			if(Boolean.parseBoolean(ReadProperty.getProperty(ConfigProperties.REMOTE))){
 				if(driver instanceof RemoteWebDriver){
@@ -96,23 +101,27 @@ public class GrantOptionPage extends Base {
 			}
 			elementUtils.doSendKeys(exisitingGrantLetter, helperComponents.getRandomFile());
 		}
+		return this;
 	}
 
-	public void enterOptionsGranted(){
+	public GrantOptionPage enterOptionsGranted(){
 		helperComponents.scrollIntoView(elementUtils.getElement(grantOptionField));
 		elementUtils.doSendKeys(grantOptionField,getOptionsGranted());
+		return this;
 	}
 
-	public void enterExercisePrice(){
+	public GrantOptionPage enterExercisePrice(){
 		elementUtils.doSendKeys(exercisePrice,getExercisePrice());
+		return this;
 	}
 
-	public void confirmGrant(){
+	public GrantOptionPage confirmGrant(){
 		helperComponents.scrollIntoView(elementUtils.getElement(grantOptionButton));
 		elementUtils.doClick(grantOptionButton);
 		if(elementUtils.doIsDisplayed(previewGrantOptionBox)){
 			elementUtils.doClick(grantConfirmButton);
 		}
+		return this;
 	}
 
 	// Selecting year from dropdown
@@ -140,7 +149,7 @@ public class GrantOptionPage extends Base {
 	}
 
 	// Selecting date from calender
-	public void selectGrantDate(String typeOfGrant) {
+	public GrantOptionPage selectGrantDate(String typeOfGrant) {
 		String selectDate = "//span[@aria-label='%replaceable%']";
 		String grantDateToSelect = typeOfGrant.contains("Fresh") ? getFreshGrantDate() : getExistingGrantDate();
 		elementUtils.doClick(grantDate);
@@ -148,6 +157,7 @@ public class GrantOptionPage extends Base {
 			selectYear(typeOfGrant);
 			driver.findElement(DynamicXpath.get(selectDate, grantDateToSelect)).click();
 		}
+		return this;
 	}
 
 	//removing localStorageVlue
@@ -170,9 +180,10 @@ public class GrantOptionPage extends Base {
 		return String.valueOf(format.format(start + (rand * (end - start))));
 	}
 
-	public void clearAndRefresh(){
+	public GrantOptionPage clearAndRefresh(){
 		clearingLocalStorage();
 		driver.navigate().refresh();
+		return this;
 	}
 	// checking successMessage after Grant
 	public boolean checkSuccessMessage() {
