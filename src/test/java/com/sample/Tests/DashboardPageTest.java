@@ -22,18 +22,18 @@ public class DashboardPageTest extends BaseTest {
         dashboardPage = loginPage.doLogin(ReadProperty.getProperty(ConfigProperties.EMAIL), ReadProperty.getProperty(ConfigProperties.PASSWORD));
     }
 
-    @Test(priority = 1, description = "Checking VestingTableHeader")
+    @Test(priority = 1, description = "Checking sample")
     public void vestingTableCheck() {
         String dashboardPageHeader = dashboardPage.getDashboardPageHeader();
         Assert.assertEquals(dashboardPageHeader, AppConstants.DASHBOARD_PAGE_HEADER);
-        System.out.println("Dashboard page header verified");
+        System.out.println("Dashboard sample header verified");
     }
 
-    @Test(priority = 2,description = "Checking Dashboard Footer")
+    @Test(priority = 2,description = "Checking sample footer")
     public void dashboardCheck() throws InterruptedException {
 
         String footerText = dashboardPage.getFooterText();
         Assert.assertEquals(footerText, AppConstants.DASHBOARD_PAGE_FOOTER);
-        System.out.println("Dashboard Footer verified");
+        System.out.println("Dashboard sfooter verified");
     }
 }
