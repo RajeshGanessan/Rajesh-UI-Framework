@@ -4,13 +4,13 @@ import Utils.PageUtils.HelperComponents;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AllGrantsPage {
+public class testpage1 {
 
     private final WebDriver driver;
     ElementUtils elementUtils;
     HelperComponents helperComponents;
 
-    public AllGrantsPage(WebDriver driver) {
+    public testpage1(WebDriver driver) {
         this.driver = driver;
         elementUtils = new ElementUtils(driver);
         helperComponents = new HelperComponents(driver);
@@ -30,7 +30,7 @@ public class AllGrantsPage {
     }
 
 
-    public AllGrantsPage clickCancelGrants(){
+    public testpage1 clickCancelGrants(){
         elementUtils.doClick(cancelMenuBtn);
         if(elementUtils.doIsDisplayed(cancelGrantBtn)){
             elementUtils.doClick(cancelGrantBtn);
@@ -38,14 +38,14 @@ public class AllGrantsPage {
         return this;
     }
 
-    public AllGrantsPage enterCancellationReason(String cancellationReason){
+    public testpage1 enterCancellationReason(String cancellationReason){
         if(elementUtils.doIsDisplayed(cancellationModal)) {
             elementUtils.doSendKeys(cancelReasonField, cancellationReason);
         }
         return this;
     }
 
-    public AllGrantsPage confirmCancellation(){
+    public testpage1 confirmCancellation(){
        if (elementUtils.doIsDisplayed(confirmCancel))
            elementUtils.doClick(confirmCancel);
        return this;

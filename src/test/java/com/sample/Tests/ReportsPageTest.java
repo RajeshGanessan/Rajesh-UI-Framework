@@ -2,7 +2,7 @@ package com.sample.Tests;
 
 import Base.BaseTest;
 import Enums.ConfigProperties;
-import Pages.AllGrantsPage;
+import Pages.testpage1;
 import Pages.ReportsPage;
 import Constants.AppConstants;
 import Utils.TestDataUtil.DataProviderManager;
@@ -14,14 +14,14 @@ import org.testng.annotations.Test;
 
 public class ReportsPageTest extends BaseTest {
 
-    AllGrantsPage allGrantsPage;
+    testpage1 testpage1;
     ReportsPage reportsPage;
 
     @BeforeClass
     public void setup(){
         loginPage.doLogin(ReadProperty.getProperty(ConfigProperties.EMAIL),ReadProperty.getProperty(ConfigProperties.PASSWORD));
-        allGrantsPage = new AllGrantsPage(driver);
-        reportsPage = allGrantsPage.goToReportsPage();
+        testpage1 = new testpage1(driver);
+        reportsPage = testpage1.goToReportsPage();
     }
 
     @Test(priority = 1, description = "verifying sample header")

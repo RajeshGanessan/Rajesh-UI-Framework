@@ -108,9 +108,9 @@ public class PendingRequestPage extends Base {
 	}
 
 	//Navigate to VestingTable Page
-	public AllGrantsPage goToVestingTablePage(){
+	public testpage1 goToVestingTablePage(){
     	elementUtils.clickElementByJS(allGrantsNav);
-    	return new AllGrantsPage(driver);
+    	return new testpage1(driver);
 	}
 }
 
